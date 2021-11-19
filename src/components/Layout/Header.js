@@ -1,9 +1,20 @@
 import React, { memo } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// redux
+import { userLogout } from "../../store/user-slice";
 
 const Header = () => {
   const { authUser } = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+
+  const token = authUser && authUser.token;
+
+  const handleLogout = (e) => {
+    dispatch(userLogout(token));
+  };
 
   return (
     <section>
@@ -21,12 +32,14 @@ const Header = () => {
         </ul>
         <div>
           {authUser ? (
-            <p>Welcome, {authUser.username}</p>
+            <div className="userInfor">
+              <p>Welcome, {authUser.username} </p>
+              <button type="button" onClick={handleLogout}>Log out</button>
+            </div>
           ) : (
             <div className="anonUser">
               {" "}
-              <Link to="accounts/login/">log in</Link>
-              {" "}
+              <Link to="accounts/login/">log in</Link>{" "}
               <Link to="accounts/register/">register</Link>
             </div>
           )}

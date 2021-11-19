@@ -31,6 +31,33 @@ export const userLogin = createAsyncThunk(
     }
 );
 
+// user logout
+export const userLogout = createAsyncThunk(
+    'users/logout',
+    async (payload, { rejectWithValue, getState })=>{
+
+        try {
+            const response = await axios({
+              url: "/accounts/logout/",
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+                authorization: `token ${payload}`,
+              },
+            });
+
+            return response.data;
+        } catch (err) {
+            const error = err
+            if(!error.response){
+                throw err
+            }
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 // user registration
 export const userRegister = createAsyncThunk(
     'users/register',
@@ -70,7 +97,7 @@ const {actions, reducer} = createSlice({
         setUser(state, action){
             const user = JSON.parse(localStorage.getItem("safekartUser"));
             state.authUser = user;
-        }
+        },
     },
     extraReducers:{
         // user login
@@ -97,6 +124,31 @@ const {actions, reducer} = createSlice({
                 state.authUser = null;
                 state.refresh++;
                 state.error = action.payload
+                console.log(state.error);
+            }
+        },
+
+        // user logout
+        [userLogout.pending]: (state, action)=>{
+            const { requestId } = action.meta;
+            state.currentRequestId = requestId;
+            state.error = null;
+        },
+        [userLogout.fulfilled]: (state, action)=>{
+            const { requestId } = action.meta;
+            if(state.currentRequestId === requestId){
+                localStorage.removeItem("safekartUser");
+                state.currentRequestId = null;
+                state.error = null;
+                state.refresh++
+            }
+        },
+        [userLogout.rejected]: (state, action)=>{
+            const { requestId } = action.meta;
+            if(state.currentRequestId === requestId){
+                state.currentRequestId = null;
+                state.refresh++;
+                state.error = action.payload;
                 console.log(state.error);
             }
         },
