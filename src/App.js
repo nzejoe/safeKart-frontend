@@ -8,9 +8,7 @@ import { actions as userActions } from "./store/user-slice";
 
 import Header from './components/Layout/Header';
 // pages
-import Store from './components/Pages/Store';
-import Home from "./components/Pages/Home";
-import LoginPage from "./components/Pages/LoginPage";
+import { Home, LoginPage, Store, UserRegisterPage } from "./components/Pages";
 
 import './App.css';
 
@@ -27,11 +25,12 @@ function App() {
 
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="store/" element={<Store/>}/>
-        <Route path="accounts/login/" element={<LoginPage/>} exact/>
+        <Route path="/" element={<Home />} />
+        <Route path="store/" element={<Store />} />
+        <Route path="accounts/login/" element={<LoginPage />} exact />
+        <Route path="accounts/register/" element={<UserRegisterPage />} exact />
       </Routes>
     </Router>
   );

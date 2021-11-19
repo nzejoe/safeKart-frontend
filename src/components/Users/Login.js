@@ -66,12 +66,12 @@ const Login = () => {
 
   return (
     <div>
-      <div className="error">
-        <p>
-          {newError && error.non_field_errors[0] /* error msg from database */}
-        </p>
-      </div>
       <form onSubmit={handleSubmit}>
+        <div className="error">
+            <p>
+            {newError && error.non_field_errors[0] /* error msg from database */}
+            </p>
+        </div>
         <Input
           type="email"
           name="email"
