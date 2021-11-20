@@ -34,6 +34,7 @@ const Header = () => {
           {authUser ? (
             <div className="userInfor">
               <p>Welcome, {authUser.username} </p>
+              <Link to="/accounts/password_change/">change password</Link> <br/>
               <button type="button" onClick={handleLogout}>Log out</button>
             </div>
           ) : (

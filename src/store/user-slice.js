@@ -112,6 +112,35 @@ export const userPasswordReset = createAsyncThunk(
     }
 );
 
+// user password change
+export const userPasswordChange = createAsyncThunk(
+    'users/password_change',
+    async (payload, { rejectWithValue, getState })=>{
+        const { authUser: { token } } = getState().users // get user token
+
+        try {
+            const response = await axios({
+              url: "/accounts/password_change/",
+              method: "PUT",
+              headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+                authorization: `token ${token}`,
+              },
+              data: payload,
+            });
+
+            return response.data;
+        } catch (err) {
+            const error = err
+            if(!error.response){
+                throw err
+            }
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 const {actions, reducer} = createSlice({
     name:'users',
     initialState: {
@@ -225,7 +254,29 @@ const {actions, reducer} = createSlice({
                 state.error = action.payload;
                 console.log(state.error);
             }
-        }
+        },
+        // user password change
+        [userPasswordChange.pending]: (state, action)=>{
+            const { requestId } = action.meta;
+            state.currentRequestId = requestId;
+            state.error = null;
+        },
+        [userPasswordChange.fulfilled]: (state, action)=>{
+            const { requestId } = action.meta;
+            if(state.currentRequestId === requestId){
+                console.log(action.payload)
+                state.currentRequestId = null;
+                state.error = null;
+            }
+        },
+        [userPasswordChange.rejected]: (state, action)=>{
+            const { requestId } = action.meta;
+            if(state.currentRequestId === requestId){
+                state.error = action.payload;
+                console.log(state.error);
+                state.currentRequestId = null;
+            }
+        },
     }
 });
 

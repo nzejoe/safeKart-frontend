@@ -6,6 +6,7 @@ import PasswordResetPage from "./PasswordResetPage";
 import PasswordResetConfirm from "./PasswordResetConfirm";
 import NotFound from "./NotFound";
 import PasswordResetComplete from "./PasswordResetComplete";
+import PasswordChangePage from "./PasswordChangePage";
 
 export {
   UserRegisterPage,
@@ -16,4 +17,5 @@ export {
   PasswordResetConfirm,
   NotFound,
   PasswordResetComplete,
+  PasswordChangePage,
 };

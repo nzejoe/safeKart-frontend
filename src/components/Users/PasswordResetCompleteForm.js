@@ -76,8 +76,9 @@ const PasswordResetCompleteForm = () => {
         if (response.data.done){
             setSuccess(true);
             sessionStorage.removeItem('user_id');
-            console.log(response.data);
-            navigate('/accounts/login/');
+            setTimeout(()=>{
+              navigate('/accounts/login/');
+            }, 4000);
         }
       try {
       } catch (error) {
@@ -91,7 +92,7 @@ const PasswordResetCompleteForm = () => {
   return (
     <div>
         {
-            linkValid && !success &&
+            linkValid && !success && 
         <form onSubmit={handleSubmit}>
             <Input
             type="password"

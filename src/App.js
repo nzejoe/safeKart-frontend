@@ -17,6 +17,7 @@ import {
   PasswordResetConfirm,
   NotFound,
   PasswordResetComplete,
+  PasswordChangePage,
 } from "./components/Pages";
 
 import './App.css';
@@ -40,6 +41,11 @@ function App() {
         <Route path="store/" element={<Store />} />
         <Route path="accounts/login/" element={<LoginPage />} exact />
         <Route path="accounts/register/" element={<UserRegisterPage />} exact />
+        <Route
+          path="accounts/password_change/"
+          element={<PasswordChangePage />}
+          exact
+        />
         <Route
           path="accounts/password_reset/"
           element={<PasswordResetPage />}
