@@ -85,6 +85,33 @@ export const userRegister = createAsyncThunk(
     }
 );
 
+// user password reset
+export const userPasswordReset = createAsyncThunk(
+    'users/password_reset',
+    async (payload, { rejectWithValue, getState })=>{
+
+        try {
+            const response = await axios({
+              url: "/accounts/password_reset/",
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+              },
+              data: payload,
+            });
+
+            return response.data;
+        } catch (err) {
+            const error = err
+            if(!error.response){
+                throw err
+            }
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+
 const {actions, reducer} = createSlice({
     name:'users',
     initialState: {
@@ -172,7 +199,30 @@ const {actions, reducer} = createSlice({
             if(state.currentRequestId === requestId){
                 state.currentRequestId = null;
                 state.refresh++;
-                state.error = action.payload
+                state.error = action.payload;
+                console.log(state.error);
+            }
+        },
+
+        // user password reset
+        [userPasswordReset.pending]: (state, action)=>{
+            const { requestId } = action.meta;
+            state.currentRequestId = requestId;
+            state.error = null;
+        },
+        [userPasswordReset.fulfilled]: (state, action)=>{
+            const { requestId } = action.meta;
+            if(state.currentRequestId === requestId){
+                state.currentRequestId = null;
+                state.error = null;
+                console.log(action.payload)
+            }
+        },
+        [userPasswordReset.rejected]: (state, action)=>{
+            const { requestId } = action.meta;
+            if(state.currentRequestId === requestId){
+                state.currentRequestId = null;
+                state.error = action.payload;
                 console.log(state.error);
             }
         }

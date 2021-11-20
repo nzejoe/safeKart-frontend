@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 // redux
 import { userLogin } from "../../store/user-slice";
@@ -67,10 +67,13 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="error">
-            <p>
-            {newError && error.non_field_errors[0] /* error msg from database */}
-            </p>
+        <div className="message">
+          <p>
+            {
+              newError &&
+                error.non_field_errors[0] /* error msg from database */
+            }
+          </p>
         </div>
         <Input
           type="email"
@@ -96,6 +99,12 @@ const Login = () => {
         />
         <div className="form__actions">
           <button type="submit">Log in</button>
+          <p>
+            Need an account? <Link to="/accounts/login/">register</Link>
+          </p>
+          <p>
+            Forgot password? <Link to="/accounts/password_reset/">reset password</Link>
+          </p>
         </div>
       </form>
     </div>

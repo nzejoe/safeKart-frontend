@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 // hooks
 import useInput from "../../hooks/input-hook";
@@ -188,6 +189,9 @@ const Register = () => {
         />
         <div className="form__actions">
           <button type="submit">register</button>
+          <p>
+            Already have an account? {" "} <Link to="/accounts/login/">log in</Link>
+          </p>
         </div>
       </form>
     </div>
