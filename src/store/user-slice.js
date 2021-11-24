@@ -145,6 +145,7 @@ const {actions, reducer} = createSlice({
     name:'users',
     initialState: {
         authUser: null,
+        token: null,
         currentRequestId: null,
         error: null,
         refresh: 0,
@@ -153,6 +154,7 @@ const {actions, reducer} = createSlice({
         setUser(state, action){
             const user = JSON.parse(localStorage.getItem("safekartUser"));
             state.authUser = user;
+            state.token = state.authUser && state.authUser.token
         },
     },
     extraReducers:{
@@ -194,6 +196,8 @@ const {actions, reducer} = createSlice({
             const { requestId } = action.meta;
             if(state.currentRequestId === requestId){
                 localStorage.removeItem("safekartUser");
+                state.authUser = null
+                state.token = null
                 state.currentRequestId = null;
                 state.error = null;
                 state.refresh++

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
     return (
@@ -10,6 +11,9 @@ const Product = ({ product }) => {
                 <h4>{product.product_name}</h4>
                 <div>
                     <span>{product.price}</span>
+                </div>
+                <div>
+                    <Link to={`/store/${product.slug}`}>view</Link>
                 </div>
             </div>
         </div>

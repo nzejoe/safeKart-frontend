@@ -7,6 +7,8 @@ import PasswordResetConfirm from "./PasswordResetConfirm";
 import NotFound from "./NotFound";
 import PasswordResetComplete from "./PasswordResetComplete";
 import PasswordChangePage from "./PasswordChangePage";
+import CartPage from "./CartPage";
+import ProductDetailPage from "./ProductDetailPage";
 
 export {
   UserRegisterPage,
@@ -18,4 +20,6 @@ export {
   NotFound,
   PasswordResetComplete,
   PasswordChangePage,
+  CartPage,
+  ProductDetailPage,
 };

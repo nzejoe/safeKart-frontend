@@ -46,7 +46,6 @@ const {actions, reducer} = createSlice({
             if(state.currentRequestId === requestId){
                 state.allProducts = action.payload;
                 state.filteredProducts = state.allProducts;
-                console.log(state.filteredProducts);
                 state.currentRequestId = null
             }
         },
