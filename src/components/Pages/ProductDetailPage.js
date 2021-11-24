@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 // state
-import { actions as cartActions } from "../../store/cart-slice";
+import { addToCart } from "../../store/cart-slice";
 // ui
 import { NotFound } from ".";
 
@@ -75,7 +75,7 @@ const ProductDetailPage = () => {
         size: selectedSize,
         brand: brand || null,
       };
-      dispatch(cartActions.addToCart({data, token}));
+      dispatch(addToCart({data, token}));
     }
   };
 
