@@ -4,6 +4,7 @@ import Cookie from 'js-cookie';
 
 const csrftoken = Cookie.get('csrftoken');
 
+
 // user login
 export const userLogin = createAsyncThunk(
     'users/login',
@@ -146,6 +147,7 @@ const {actions, reducer} = createSlice({
     initialState: {
         authUser: null,
         token: null,
+        loginRedirect: null,
         currentRequestId: null,
         error: null,
         refresh: 0,
@@ -156,6 +158,10 @@ const {actions, reducer} = createSlice({
             state.authUser = user;
             state.token = state.authUser && state.authUser.token
         },
+
+        setLoginRedirect(state, action){
+            state.loginRedirect = action.payload
+        }
     },
     extraReducers:{
         // user login
@@ -196,7 +202,8 @@ const {actions, reducer} = createSlice({
             const { requestId } = action.meta;
             if(state.currentRequestId === requestId){
                 localStorage.removeItem("safekartUser");
-                state.authUser = null
+                sessionStorage.clear();
+                // state.authUser = null
                 state.token = null
                 state.currentRequestId = null;
                 state.error = null;

@@ -9,6 +9,10 @@ import PasswordResetComplete from "./PasswordResetComplete";
 import PasswordChangePage from "./PasswordChangePage";
 import CartPage from "./CartPage";
 import ProductDetailPage from "./ProductDetailPage";
+import CheckoutPage from "./CheckoutPage";
+import PlaceOrderPage from "./PlaceOrderPage";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 
 export {
   UserRegisterPage,
@@ -22,4 +26,8 @@ export {
   PasswordChangePage,
   CartPage,
   ProductDetailPage,
+  CheckoutPage,
+  PlaceOrderPage,
+  PrivateRoute,
+  PublicRoute,
 };

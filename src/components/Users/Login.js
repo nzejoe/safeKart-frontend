@@ -9,7 +9,8 @@ import Input from "../UI/Input";
 import useInput from "../../hooks/input-hook";
 
 const Login = () => {
-  const { error } = useSelector((state) => state.users);
+  const { error, loginRedirect } = useSelector((state) => state.users);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,7 +48,11 @@ const Login = () => {
 
         const resultPromise = await dispatch(userLogin(data));
         if(userLogin.fulfilled.match(resultPromise)){
+          if(loginRedirect){
+            navigate(loginRedirect)
+          }else{
             navigate('/');
+          }
         }
     }
   };

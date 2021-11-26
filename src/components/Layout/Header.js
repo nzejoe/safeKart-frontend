@@ -3,15 +3,16 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // redux
-import { userLogout } from "../../store/user-slice";
+import { userLogout, actions as userActions } from "../../store/user-slice";
 import { getCartList } from "../../store/cart-slice";
 // utils
-import { getTotalCart } from "../../utils/cart";
+import { getTotalCart } from "../../utils";
 
 const Header = () => {
-  const { authUser, token } = useSelector((state) => state.users);
+  const { authUser } = useSelector((state) => state.users);
   const { cartList, refresh } = useSelector((state) => state.carts);
 
+  const token = authUser && authUser.token
   const totalCartItems = getTotalCart(cartList);
 
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Header = () => {
 
   const handleLogout = (e) => {
     dispatch(userLogout(token));
+    dispatch(userActions.setLoginRedirect(null));
   };
 
   return (
@@ -35,7 +37,7 @@ const Header = () => {
             <NavLink to="/">home</NavLink>
           </li>
           <li>
-            <NavLink to="store/">store</NavLink>
+            <NavLink to="/store/">store</NavLink>
           </li>
         </ul>
         <div>

@@ -20,6 +20,10 @@ import {
   PasswordChangePage,
   CartPage,
   ProductDetailPage,
+  CheckoutPage,
+  PlaceOrderPage,
+  PrivateRoute,
+  PublicRoute,
 } from "./components/Pages";
 
 import './App.css';
@@ -43,30 +47,48 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="store/" element={<Store />} />
-        <Route path="store/:slug/" element={<ProductDetailPage />} exact/>
-        <Route path="accounts/login/" element={<LoginPage />} exact />
-        <Route path="accounts/register/" element={<UserRegisterPage />} exact />
+        <Route path="store/:slug/" element={<ProductDetailPage />} exact />
+        <Route
+          path="accounts/login/"
+          element={<PublicRoute children={<LoginPage />} />}
+          exact
+        />
+        <Route
+          path="accounts/register/"
+          element={<PublicRoute children={<UserRegisterPage />} />}
+          exact
+        />
         <Route
           path="accounts/password_change/"
-          element={<PasswordChangePage />}
+          element={<PrivateRoute children={<PasswordChangePage />} />}
           exact
         />
         <Route
           path="accounts/password_reset/"
-          element={<PasswordResetPage />}
+          element={<PublicRoute children={<PasswordResetPage />} />}
           exact
         />
         <Route
           path="accounts/password_reset_complete/"
-          element={<PasswordResetComplete />}
+          element={<PublicRoute children={<PasswordResetComplete />} />}
           exact
         />
         <Route
           path="accounts/password_reset_confirm/:uidb64/:token"
-          element={<PasswordResetConfirm />}
+          element={<PublicRoute children={<PasswordResetConfirm />} />}
           exact
         />
-        <Route path="carts/" element={<CartPage/>}/>
+        <Route path="carts/" element={<CartPage />} exact />
+        <Route
+          path="checkout/"
+          element={<PrivateRoute children={<CheckoutPage />} />}
+          exact
+        />
+        <Route
+          path="place_order/"
+          element={<PrivateRoute children={<PlaceOrderPage />} />}
+          exact
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
