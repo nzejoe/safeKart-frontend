@@ -24,13 +24,14 @@ import {
   PlaceOrderPage,
   PrivateRoute,
   PublicRoute,
+  OrderConfirmedPage,
 } from "./components/Pages";
 
 import './App.css';
 
 // set axios default baseURL
 axios.defaults.baseURL = "http://localhost:8000";
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 function App() {
   const { refresh } = useSelector((state) => state.users);
@@ -89,6 +90,7 @@ function App() {
           element={<PrivateRoute children={<PlaceOrderPage />} />}
           exact
         />
+        <Route path="order_confirmed/" element={<PrivateRoute children={<OrderConfirmedPage/>} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

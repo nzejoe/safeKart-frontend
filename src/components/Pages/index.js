@@ -13,6 +13,7 @@ import CheckoutPage from "./CheckoutPage";
 import PlaceOrderPage from "./PlaceOrderPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import OrderConfirmedPage from "./OrderConfirmedPage";
 
 export {
   UserRegisterPage,
@@ -30,4 +31,5 @@ export {
   PlaceOrderPage,
   PrivateRoute,
   PublicRoute,
+  OrderConfirmedPage,
 };

@@ -16,8 +16,7 @@ const PlaceOrderPage = () => {
     const tax = ((2 / 100) * getTotalAmount(cartList)).toFixed(2);
     const totalAmount = getTotalAmount(cartList);
     const grandTotal = parseFloat(tax) + totalAmount;
-    
-     console.log(order);
+
 
     // warning user of losing data if they refresh the browser
     useEffect(()=>{
