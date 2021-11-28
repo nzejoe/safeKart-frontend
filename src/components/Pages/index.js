@@ -14,6 +14,8 @@ import PlaceOrderPage from "./PlaceOrderPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import OrderConfirmedPage from "./OrderConfirmedPage";
+import OrderHistoryPage from "./OrderHistoryPage";
+import OrderDetailPage from "./OrderDetailPage";
 
 export {
   UserRegisterPage,
@@ -32,4 +34,6 @@ export {
   PrivateRoute,
   PublicRoute,
   OrderConfirmedPage,
+  OrderHistoryPage,
+  OrderDetailPage,
 };

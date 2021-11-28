@@ -28,3 +28,8 @@ code {
   max-width: 111rem;
   margin: auto;
 }
+
+table th,
+table td{
+  padding: .5rem 1rem;
+}

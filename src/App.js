@@ -25,6 +25,8 @@ import {
   PrivateRoute,
   PublicRoute,
   OrderConfirmedPage,
+  OrderHistoryPage,
+  OrderDetailPage,
 } from "./components/Pages";
 
 import './App.css';
@@ -90,7 +92,18 @@ function App() {
           element={<PrivateRoute children={<PlaceOrderPage />} />}
           exact
         />
-        <Route path="order_confirmed/" element={<PrivateRoute children={<OrderConfirmedPage/>} />} />
+        <Route
+          path="order_confirmed/"
+          element={<PrivateRoute children={<OrderConfirmedPage />} />}
+        />
+        <Route
+          path="order_history/"
+          element={<PrivateRoute children={<OrderHistoryPage />} />}
+        />
+        <Route
+          path="order_history/:order_number/"
+          element={<PrivateRoute children={<OrderDetailPage />} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

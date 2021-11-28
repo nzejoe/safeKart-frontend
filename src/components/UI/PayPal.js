@@ -5,6 +5,7 @@ import axios from "axios";
 
 // store
 import { actions as orderActions } from '../../store/order-slice'
+import { actions as cartActions } from '../../store/cart-slice'
 
 const PayPal = ({ totalAmount, tax, grandTotal}) => {
   const { order } = useSelector((state) => state.orders);
@@ -73,6 +74,7 @@ const PayPal = ({ totalAmount, tax, grandTotal}) => {
                             data: orderData,
                           })
                           if(response.status === 200){
+                              dispatch(cartActions.refreshCart());
                               navigate('/order_confirmed/', {replace: true});
                               console.log("data send")
                           }
