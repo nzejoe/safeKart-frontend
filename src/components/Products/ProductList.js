@@ -2,16 +2,22 @@ import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getProducts } from '../../store/product-slice'
+import { getProducts, actions as productActions } from '../../store/product-slice'
 import Product from './Product'
 
 const ProductList = () => {
-    const { filteredProducts } = useSelector(state => state.products);
+    const { filteredProducts, filter } = useSelector(state => state.products);
+
+    
 
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getProducts());
     },[dispatch])
+
+    useEffect(()=>{
+        dispatch(productActions.getFilterProducts());
+    }, [dispatch, filter])
 
     return (
         <div>

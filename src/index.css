@@ -33,3 +33,22 @@ table th,
 table td{
   padding: .5rem 1rem;
 }
+
+.filter > div{
+  margin-bottom: 2rem;
+}
+
+.filter > div h4{
+  margin-bottom: 1rem;
+}
+
+.filter button{
+  display: block;
+  margin-bottom: .5rem;
+
+}
+
+.filter .active{
+  background-color: brown;
+  color: white;
+}
