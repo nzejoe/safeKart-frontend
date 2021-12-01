@@ -48,7 +48,9 @@ table td{
 
 }
 
-.filter .active{
+.filter .active, 
+.page__btns .active
+{
   background-color: brown;
   color: white;
 }

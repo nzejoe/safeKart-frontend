@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // store
 import { actions as productActions } from "../../store/product-slice";
 // utils
-import { getUniqueValues, getUniqueCategory, getMaxPrice } from "../../utils";
+import { getUniqueValues, getUniqueCategory, getMaxPrice} from "../../utils";
 
 import ProductList from "../Products/ProductList";
 
