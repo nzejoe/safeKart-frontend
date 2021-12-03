@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+
 // state
 import { addToCart } from "../../store/cart-slice";
+
+import UserReview from "../Products/UserReview";
+
 // ui
 import { NotFound } from ".";
+import ReviewStar from "../UI/ReviewStar";
+import ReviewForm from "../Products/ReviewForm";
+import MyReview from "../Products/MyReview";
 
 const ProductDetailPage = () => {
-    const { token } = useSelector(state => state.users)
+  const { token, authUser } = useSelector((state) => state.users);
   const [product, setProduct] = useState(null);
+  const [isPurchased, setIsPurchased] = useState(false);
+  const [reviews, setReview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [colors, setColors] = useState(null);
   const [sizes, setSizes] = useState(null);
@@ -19,28 +28,45 @@ const ProductDetailPage = () => {
   const [selectedSize, setSelectedSize] = useState(null);
 
   const [formHasError, setFormHasError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // page refresh on review submitted
+  const [refresh, refreshPage] = useState(0);
+  // user review
+  const [alreadyReviewed, setAlreadyReviewed] = useState(false);
+  const [myReview, setMyReview] = useState(null);
 
   const { slug } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios({
-      url: `products/${slug}`,
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          setProduct(res.data);
+    const getProduct = async () => {
+      try {
+        const response = await axios({
+          url: `products/${slug}`,
+          method: "GET",
+          headers: {
+            authorization: token && `token ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          const data = response.data;
+          setProduct(data.product);
+          setIsPurchased(data.is_purchased);
+          setAlreadyReviewed(data.already_reviewed);
           setLoading(false);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log({ ...error });
         setLoading(false);
-      });
-  }, [slug]);
+      }
+    };
 
+    getProduct();
+  }, [slug, token, refresh]);
+
+  // set variations
   useEffect(() => {
     if (product) {
       const colors = product.variations.colors && product.variations.colors;
@@ -49,6 +75,7 @@ const ProductDetailPage = () => {
       setColors(colors);
       setSizes(sizes);
       setBrand(brand);
+      setReview(product.reviews);
     }
   }, [product]);
 
@@ -56,15 +83,24 @@ const ProductDetailPage = () => {
   useEffect(() => {
     if (colors && colors.length > 0 && !selectedColor) {
       setFormHasError(true);
-      setErrorMsg("Please choose color.")
+      setErrorMsg("Please choose color.");
     } else if (sizes && sizes.length > 0 && !selectedSize) {
       setFormHasError(true);
       setErrorMsg("Please choose size.");
-    }else{
-        setFormHasError(false)
+    } else {
+      setFormHasError(false);
     }
   }, [colors, selectedColor, sizes, selectedSize]);
-  
+
+  // set user review
+  useEffect(() => {
+    if (alreadyReviewed) {
+      const username = authUser && authUser.username;
+      const review = reviews.find((review) => review.user === username);
+      setMyReview(review);
+    }
+  }, [alreadyReviewed, authUser, reviews]);
+
   // form submit
   const addItemHandler = (e) => {
     e.preventDefault();
@@ -75,7 +111,7 @@ const ProductDetailPage = () => {
         size: selectedSize,
         brand: brand || null,
       };
-      dispatch(addToCart({data, token}));
+      dispatch(addToCart({ data, token }));
     }
   };
 
@@ -87,6 +123,11 @@ const ProductDetailPage = () => {
     setSelectedSize(e.target.value);
   };
 
+  // page refresh handler
+  const handlePageRefresh = useCallback(()=>{
+    refreshPage(refresh + 1);
+  },[refresh])
+  
   return (
     <section className={`section`}>
       <div className="section__wrapper">
@@ -100,8 +141,12 @@ const ProductDetailPage = () => {
               ></img>
             </div>
             <div>
-              {brand && <p>{brand}</p>}
               <h5>{product.product_name}</h5>
+              <div className="review">
+                <ReviewStar rating={product.rating} /> (
+                <span>{product.reviews.length} customer reviews</span>)
+              </div>
+              {brand && <p>{brand}</p>}
               <p>$ {product.price}</p>
             </div>
             <div>
@@ -171,6 +216,35 @@ const ProductDetailPage = () => {
                 </div>
               </form>
             </div>
+
+            {/* review */}
+            <div>
+              {/* review form  */}
+              {!alreadyReviewed && isPurchased && (
+                <ReviewForm
+                  productId={product.id}
+                  handlePageRefresh={handlePageRefresh}
+                />
+              )}
+              {/* end of review form */}
+
+              {/* user review */}
+              {myReview && alreadyReviewed && <MyReview review={myReview} handleRefresh={handlePageRefresh}/>}
+
+              {/* review list */}
+              {reviews && reviews.length !== 0 ? (
+                <React.Fragment>
+                  <h3>Reviews</h3>
+                  {reviews.map((review) => {
+                    return <UserReview key={review.id} review={review} />;
+                  })}
+                </React.Fragment>
+              ) : (
+                <h4>No review for this product yet.</h4>
+              )}
+              {/* end of review list */}
+            </div>
+            {/* end of review */}
           </div>
         )}
         {

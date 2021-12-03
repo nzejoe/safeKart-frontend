@@ -1,10 +1,11 @@
-:root{
+
+:root {
   font-size: 62.5%;
 }
 
 *,
 *::before,
-*::after{
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,45 +13,67 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-
-.section__wrapper{
+.section__wrapper {
   width: 100%;
   max-width: 111rem;
   margin: auto;
 }
 
 table th,
-table td{
-  padding: .5rem 1rem;
+table td {
+  padding: 0.5rem 1rem;
 }
 
-.filter > div{
+.filter > div {
   margin-bottom: 2rem;
 }
 
-.filter > div h4{
+.filter > div h4 {
   margin-bottom: 1rem;
 }
 
-.filter button{
+.filter button {
   display: block;
-  margin-bottom: .5rem;
-
+  margin-bottom: 0.5rem;
 }
 
-.filter .active, 
-.page__btns .active
-{
+.filter .active,
+.page__btns .active {
   background-color: brown;
   color: white;
 }
+
+/* rating */
+.review .rating__stars {
+  margin-right: 2rem;
+}
+.review .rating__stars_group {
+  margin-right: 1rem;
+  position: relative;
+}
+.review > span > span {
+  position: relative;
+}
+.review > span > span .star {
+  position: absolute;
+}
+.review > span > span .rate {
+  color: orange;
+}
+
+.review__form input,
+.review__form textarea {
+  display: block;
+}
+

@@ -32,13 +32,27 @@ export const getOrderDateTime = (orderDate) => {
     const year = date.getFullYear();
     const month = date.getUTCMonth();
     const hour = date.getHours()
-    const hourFormatted = hour < 10 && `0${hour}` 
+    const hourFormatted = hour < 10 ? `0${hour}` : hour
     const minute = date.getMinutes()
-    const minuteFormatted = hour < 10 && `0${minute}`; // adding a leading 0 if minute is less than 10
+    const minuteFormatted = minute < 10 ? `0${minute}` : minute; // adding a leading 0 if minute is less than 10
     const monthString = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const day = date.getDate();
 
     return `${day}-${monthString[month]}-${year} ${hourFormatted}:${minuteFormatted}`;
+}
+
+export const getDateTime = (orderDate) => {
+    const date = new Date(orderDate);
+    const year = date.getFullYear();
+    const month = date.getUTCMonth();
+    const hour = date.getHours()
+    const hourFormatted = hour < 10 ? `0${hour}` : hour ; 
+    const minute = date.getMinutes()
+    const minuteFormatted = minute < 10 ? `0${minute}` : minute;; // adding a leading 0 if minute is less than 10
+    const monthString = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const day = date.getDate();
+
+    return `${day} ${monthString[month]} ${year} ${hourFormatted}:${minuteFormatted}`;
 }
 
 
