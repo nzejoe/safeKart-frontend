@@ -1,0 +1,35 @@
+.rating__container{
+    display: inline-block;
+}
+
+.rating__stars{
+    display: flex;
+    flex-direction: row-reverse;
+    float: left;
+    clear: both;
+    position: relative;
+}
+
+.rating__stars > input{
+    display: none;
+}
+
+.rating__stars > label{
+    position: relative;
+    cursor: pointer;
+    font-size: 2rem;
+    margin: 0;
+}
+
+
+.rating__stars > label:not(.half){
+    padding-right: .5rem;
+}
+
+.rating__stars > label:hover, 
+.rating__stars > label:hover ~ label,
+.rating__stars > input:checked + label~ label,
+.rating__stars > input:checked + label 
+{
+    color: #ffb503;
+}
