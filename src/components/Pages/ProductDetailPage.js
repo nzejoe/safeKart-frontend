@@ -17,6 +17,7 @@ import MyReview from "../Products/MyReview";
 const ProductDetailPage = () => {
   const { token, authUser } = useSelector((state) => state.users);
   const [product, setProduct] = useState(null);
+  const [defaultImage, setDefaultImage] = useState(null);
   const [isPurchased, setIsPurchased] = useState(false);
   const [reviews, setReview] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -76,6 +77,7 @@ const ProductDetailPage = () => {
       setSizes(sizes);
       setBrand(brand);
       setReview(product.reviews);
+      setDefaultImage(product.image);
     }
   }, [product]);
 
@@ -124,21 +126,40 @@ const ProductDetailPage = () => {
   };
 
   // page refresh handler
-  const handlePageRefresh = useCallback(()=>{
+  const handlePageRefresh = useCallback(() => {
     refreshPage(refresh + 1);
-  },[refresh])
-  
+  }, [refresh]);
+
   return (
     <section className={`section`}>
       <div className="section__wrapper">
         {loading && <p>please wait...</p>}
         {product && !loading && (
           <div>
-            <div className="product__img_container">
-              <img
-                src={`http://localhost:8000${product.image}`}
-                alt={product.product_name}
-              ></img>
+            <div className="product__img_container" style={{display: 'flex', alignItems: 'center'}}>
+              <div className="gallery__thumbs">
+                {product.gallery.map((img, index) => {
+                  return (
+                    <div
+                      className="thumb"
+                      key={index}
+                      onClick={(e) => setDefaultImage(img.image)}
+                    >
+                      <img
+                        src={`http://localhost:8000${img.thumb}`}
+                        alt={product.product_name}
+                        width="50"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="default__img">
+                <img
+                  src={`http://localhost:8000${defaultImage}`}
+                  alt={product.product_name}
+                ></img>
+              </div>
             </div>
             <div>
               <h5>{product.product_name}</h5>
@@ -229,7 +250,9 @@ const ProductDetailPage = () => {
               {/* end of review form */}
 
               {/* user review */}
-              {myReview && alreadyReviewed && <MyReview review={myReview} handleRefresh={handlePageRefresh}/>}
+              {myReview && alreadyReviewed && (
+                <MyReview review={myReview} handleRefresh={handlePageRefresh} />
+              )}
 
               {/* review list */}
               {reviews && reviews.length !== 0 ? (

@@ -16,6 +16,7 @@ import PublicRoute from "./PublicRoute";
 import OrderConfirmedPage from "./OrderConfirmedPage";
 import OrderHistoryPage from "./OrderHistoryPage";
 import OrderDetailPage from "./OrderDetailPage";
+import HomeSearch from "./HomeSearch";
 
 export {
   UserRegisterPage,
@@ -36,4 +37,5 @@ export {
   OrderConfirmedPage,
   OrderHistoryPage,
   OrderDetailPage,
+  HomeSearch,
 };

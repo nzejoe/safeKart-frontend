@@ -68,7 +68,7 @@ const ProductFilter = () => {
     <div className="filter">
       <div>
         <input
-          type="text"
+          type="search"
           placeholder="search"
           value={query}
           onChange={onSearchChange}

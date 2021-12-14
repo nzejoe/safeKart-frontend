@@ -27,6 +27,7 @@ import {
   OrderConfirmedPage,
   OrderHistoryPage,
   OrderDetailPage,
+  HomeSearch,
 } from "./components/Pages";
 
 import './App.css';
@@ -48,7 +49,9 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} >
+          <Route path="search" element={<HomeSearch/>}/>
+        </Route>
         <Route path="store/" element={<Store />} />
         <Route path="store/:slug/" element={<ProductDetailPage />} exact />
         <Route
