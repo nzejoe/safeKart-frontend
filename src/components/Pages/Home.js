@@ -54,7 +54,7 @@ const Home = () => {
           <div className="top__products">
             <h3>Top selling products</h3>
             {topProducts.map(product => {
-              return <Product product={product} key={product.id}/>
+              return <Product product={product} key={product.id} grid={true}/> // set it to grid view
             })}
             <Link to='store'>View all</Link>
           </div>

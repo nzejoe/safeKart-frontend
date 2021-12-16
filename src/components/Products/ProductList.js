@@ -15,6 +15,7 @@ const ProductList = () => {
   const { filteredProducts, filter } = useSelector((state) => state.products);
  
   const [page, setPage] = useState(0);
+  const [grid, setGrid] = useState(true);
 
  const products = getPaginatedProducts(filteredProducts)
 
@@ -35,10 +36,18 @@ const ProductList = () => {
 
   return (
     <div>
-      {products ?
+      <div className="products__view_switch">
+        {/* GRID TOGGLE BUTTONS*/}
+        <button onClick={() => setGrid(true)}>Grid</button>
+        <button onClick={() => setGrid(false)}>List</button>
+      </div>
+      {products ? (
         products[page].map((product) => {
-          return <Product key={product.id} product={product} />;
-        }): <h4>Sorry! No product matches your search patterns...</h4>}
+          return <Product key={product.id} product={product} grid={grid} />;
+        })
+      ) : (
+        <h4>Sorry! No product matches your search patterns...</h4>
+      )}
       {products && products.length > 1 && (
         <div className="page__btns">
           {page > 0 ? (
