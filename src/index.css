@@ -1,6 +1,9 @@
 
 :root {
   font-size: 62.5%;
+  --primary-color: #6c91c2;
+  --light-shadow: 0 0 1px #000;
+  --light-shadow-1: 0 0 3px #000;
 }
 
 *,
@@ -24,10 +27,18 @@ code {
     monospace;
 }
 
+.section{
+  padding: 1.5rem;
+}
+
 .section__wrapper {
   width: 100%;
   max-width: 111rem;
   margin: auto;
+}
+
+.nav__links a.active::after{
+  width: 100%;
 }
 
 table th,
