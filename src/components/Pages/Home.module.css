@@ -1,0 +1,269 @@
+.hero {
+  height: 18rem;
+}
+
+.slide__viewer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  background-image: radial-gradient(
+    circle,
+    var(--primary-color-dark) 30%,
+    var(--primary-color) 100%
+  );
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  transition: all 2s;
+  margin-left: 4rem;
+  display: none;
+}
+
+.slide__active {
+  display: block;
+  animation: fadeInSlide 3s forwards;
+}
+
+.slide img {
+  position: relative;
+  pointer-events: none;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.slide__info {
+  font-size: 1rem;
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  width: 50%;
+  color: var(--dark-color);
+}
+
+.slide__info h3,
+.slide__info h4,
+.slide__info a,
+.slide__info p {
+  opacity: 0;
+  margin-bottom: 0.5em;
+}
+
+.slide__info_hash {
+  animation: animateHash 1s;
+  animation-fill-mode: forwards;
+  font-size: 0.9em;
+}
+
+.slide__info_header {
+  font-size: 1.4em;
+  animation: animateHeader 1s;
+  animation-delay: 1.2s;
+  animation-fill-mode: forwards;
+}
+
+.slide__info_text {
+  animation: animateText 2s;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+  font-size: 0.8em;
+  /* font-weight: 100; */
+}
+
+.link__container {
+  
+}
+
+.slide__info_link {
+  animation: animateLink 1s;
+  animation-delay: 1.8s;
+  animation-fill-mode: forwards;
+  display: inline-block;
+  font-size: 0.7em;
+  margin-top: 0.5em;
+}
+
+.slide__btns {
+  position: absolute;
+  left: 20%;
+  bottom: 1rem;
+  z-index: 2;
+}
+.slide__btn {
+  position: relative;
+  margin-right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+.slide__btn::after {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+.slide__btn_active::after,
+.slide__btn:hover::after {
+  background-color: var(--primary-color);
+}
+
+/* ANIMATION */
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animateHash {
+  0% {
+    margin-top: 10rem;
+    opacity: 0;
+  }
+
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animateHeader {
+  0% {
+    margin-top: 10rem;
+    opacity: 0;
+  }
+
+  50% {
+    margin-top: 10rem;
+    opacity: 0;
+  }
+
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animateText {
+  0% {
+    margin-top: 10rem;
+    opacity: 0;
+  }
+
+  70% {
+    margin-top: 0;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animateLink {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* SCREEN SIZE */
+
+@media screen and (min-width: 600px) {
+  .hero {
+    height: 30rem;
+  }
+
+  .slide__info {
+    font-size: 1.5rem;
+  }
+
+  .slide__info_2 {
+    top: 5rem;
+    left: 5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    height: 40rem;
+  }
+
+  .slide__info {
+    font-size: 2rem;
+    left: 5rem;
+  }
+
+  .slide__info_2 {
+    top: 10rem;
+    left: 7rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .hero {
+    height: 35rem;
+  }
+
+  .slide__info {
+    font-size: 2rem;
+    left: 5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero {
+    height: 50rem;
+  }
+
+  .slide__info {
+    font-size: 2.5rem;
+    left: 7rem;
+  }
+  .slide__info_2 {
+    top: 15rem;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .hero {
+    height: calc(100vh - 7rem);
+  }
+
+  .slide__info {
+    font-size: 2.5rem;
+    left: 15rem;
+    top: 13rem;
+  }
+  .slide__info_2 {
+    top: 20rem;
+  }
+}

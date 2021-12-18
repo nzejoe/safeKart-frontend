@@ -2,6 +2,10 @@
 :root {
   font-size: 62.5%;
   --primary-color: #6c91c2;
+  --primary-color-dark: #2465b9d8;
+  --primary-color-light: #6c91c2b9;
+  --dark-color: rgba(0, 0, 0, 0.822);
+  --dark-color-2: rgba(0, 0, 0, 0.527);
   --light-shadow: 0 0 1px #000;
   --light-shadow-1: 0 0 3px #000;
 }
@@ -26,7 +30,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+/* LAYOUT SECTION */
 .section{
   padding: 1.5rem;
 }
@@ -36,6 +40,22 @@ code {
   max-width: 111rem;
   margin: auto;
 }
+
+.hero {
+  margin-bottom: 5rem;
+}
+
+/* END OF LAYOUT SECTION */
+
+/* UI */
+.btn__primary{
+  text-decoration: none;
+  background-color: #000;
+  padding: .5rem 1rem;
+  border-radius: 10rem;
+  color: #fff;
+}
+/* END OF UI */
 
 .nav__links a.active::after{
   width: 100%;
