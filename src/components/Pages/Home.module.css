@@ -7,11 +7,11 @@
   width: 100%;
   overflow: hidden;
   height: 100%;
-  background-image: radial-gradient(
+  /* background-image: radial-gradient(
     circle,
     var(--primary-color-dark) 30%,
     var(--primary-color) 100%
-  );
+  ); */
 }
 
 .slider {
@@ -79,9 +79,6 @@
   /* font-weight: 100; */
 }
 
-.link__container {
-  
-}
 
 .slide__info_link {
   animation: animateLink 1s;

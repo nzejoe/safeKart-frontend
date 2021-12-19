@@ -8,7 +8,6 @@ import Product from "../Products/Product";
 import { heroImageData } from "../../data";
 // styles
 import styles from "./Home.module.css";
-import { useTransition, animated } from "react-spring";
 
 const Home = () => {
   document.title = "Home | SafeKart";
@@ -32,16 +31,6 @@ const Home = () => {
 
     return () => clearTimeout(timer);
   }, [activeImage]);
-
-  // ANIMATION
-  // SLIDE IMAGE
-  const transition = useTransition(heroImageData, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    delay: 0,
-    config: { duration: 200 },
-  });
 
   useEffect(() => {
     if (query) {
@@ -83,6 +72,7 @@ const Home = () => {
                       className={`${styles.slide} ${
                         activeImage === index && styles.slide__active
                       }`}
+                      key={index}
                     >
                       <img src={item.url} alt="" />
                       <div

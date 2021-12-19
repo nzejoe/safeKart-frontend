@@ -1,0 +1,67 @@
+.search__results {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  padding: 2rem;
+  margin-top: 12rem; /* remove the height of form*/
+  transform: scale(1.5);
+  animation: fadeIn 1s forwards;
+}
+
+.closeSearch {
+  animation: fadeOut .5s forwards;
+}
+
+.search__product {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.search__product:visited,
+.search__product:link {
+  color: rgb(91, 91, 255);
+}
+
+.search__product img {
+  width: 5rem;
+}
+
+.search__product span {
+  font-size: 1.5rem;
+}
+
+/* HOVER */
+.search__product:hover {
+  text-decoration: underline;
+}
+
+/* ANIMATIONs */
+@keyframes fadeIn {
+  from {
+    transform: scale(5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(10);
+    opacity: 0;
+  }
+}
+
+/* SCREEN SIZE */
+
+@media screen and (min-width: 600px) {
+  .search__product img {
+    width: 10rem;
+  }
+}

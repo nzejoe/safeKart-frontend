@@ -6,6 +6,9 @@
   --primary-color-light: #6c91c2b9;
   --dark-color: rgba(0, 0, 0, 0.822);
   --dark-color-2: rgba(0, 0, 0, 0.527);
+  --dark-trans: rgba(0, 0, 0, 0.322);
+  --dark-trans-2: rgba(0, 0, 0, 0.178);
+  --light-color-trans: rgba(255, 255, 255, 0.425);
   --light-shadow: 0 0 1px #000;
   --light-shadow-1: 0 0 3px #000;
 }
@@ -55,6 +58,7 @@ code {
   border-radius: 10rem;
   color: #fff;
 }
+
 /* END OF UI */
 
 .nav__links a.active::after{

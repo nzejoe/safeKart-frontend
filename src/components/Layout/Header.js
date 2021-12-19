@@ -2,8 +2,8 @@ import React, { memo, useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // icons
-import { BsCart4 } from "react-icons/bs";
-import { AiOutlineLogout } from "react-icons/ai";
+import { BsCart4, BsSearch } from "react-icons/bs";
+import { AiOutlineLogout, AiOutlineCloseCircle } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 
 // redux
@@ -13,10 +13,17 @@ import { getCartList } from "../../store/cart-slice";
 import { getTotalCart } from "../../utils";
 // style
 import styles from "./Header.module.css";
+//ui
+import ModalSearch from "../UI/ModalSearch";
 
 const Header = () => {
   const { authUser } = useSelector((state) => state.users);
   const { cartList, refresh } = useSelector((state) => state.carts);
+
+  // search
+  const [isSearching, setIsSearching] = useState(false);
+  const [closeSearch, setCloseSearch] = useState(false);
+  const [query, setQuery] = useState("");
 
   // navbar navlinks toggler
   const [showLinks, setShowLinks] = useState(false);
@@ -50,8 +57,68 @@ const Header = () => {
     return () => window.removeEventListener("resize", runSetLink);
   }, []);
 
+  // SEARCH HANDLER FUNCTION
+  const handleSearch = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const closeSearchHandler = () => {
+    setQuery("");
+    setCloseSearch(true);
+    let timer = null;
+    // wait for transition to finish before removing search model
+    clearTimeout(timer); // clear existing timer
+    timer = setTimeout(() => {
+      setIsSearching(false);
+    }, 300);
+  };
+
   return (
     <section className={`${styles.navbar}`}>
+      {/* SEARCH */}
+      <div
+        className={`${styles.search__modal} ${
+          isSearching && styles.show__search
+        }`}
+      >
+        <div
+          className={styles.search__modal_overlay}
+          onClick={closeSearchHandler}
+        ></div>
+        <div className={`${styles.search__container}`}>
+          <div
+            className={`${styles.form__container} ${
+              closeSearch && styles.search__modal_close
+            }`}
+          >
+            <form onSubmit={(e) => e.preventDefault()}>
+              <AiOutlineCloseCircle
+                className={styles.close__btn}
+                onClick={closeSearchHandler}
+                title="Close search"
+              />
+              <p>Search products</p>
+              <div className={styles.form__group}>
+                <input
+                  type="search"
+                  name=""
+                  id=""
+                  placeholder="Live search"
+                  value={query}
+                  onChange={handleSearch}
+                />
+              </div>
+            </form>
+          </div>
+          <ModalSearch
+            query={query}
+            setIsSearching={setIsSearching}
+            setQuery={setQuery}
+            closeSearch={closeSearch}
+          />
+        </div>
+        <div className="search__results"></div>
+      </div>
       <div className={`section__wrapper`}>
         <div className={styles.logo}>
           <h5>SafeKart</h5>
@@ -59,7 +126,9 @@ const Header = () => {
         <div className={`${styles.navbar__navigation}`}>
           {/* TOGGLE BUTTON */}
           <div
-            className={`${styles.navbar__nav_toggler} ${showLinks && styles.nav__links_active}`}
+            className={`${styles.navbar__nav_toggler} ${
+              showLinks && styles.nav__links_active
+            }`}
             onClick={() => setShowLinks(!showLinks)}
           >
             <span className={styles.toggle__btn}></span>
@@ -71,6 +140,16 @@ const Header = () => {
           >
             <div className={styles.link__wrapper}>
               <ul className="nav__links">
+                <li className={styles.search}>
+                  <BsSearch
+                    onClick={() => {
+                      setIsSearching(true);
+                      setShowLinks(false);
+                      setCloseSearch(false);
+                    }}
+                    title="Search products"
+                  />
+                </li>
                 <li>
                   <NavLink to="/" onClick={() => setShowLinks(false)}>
                     home
