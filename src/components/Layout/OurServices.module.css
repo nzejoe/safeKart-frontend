@@ -1,0 +1,43 @@
+.our__services{
+    padding: 3em 0;
+}
+
+.service{
+    margin: 5em 0;
+    text-align: center;
+    color: var(--dark-color);
+}
+
+.service h5{
+    font-size: 1.5em;
+    margin-bottom: .5em;
+}
+
+.service p{
+    font-size: 1.5em;
+    margin-bottom: .5em;
+    color: var(--dark-trans);
+}
+
+.icon{
+    font-size: 5em;
+    margin-bottom: .2em;
+}
+
+@media screen and (min-width: 600px) {
+    .services{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .service{
+        flex: 0 0 calc((100% / 2) - 2rem);
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .service{
+        flex: 0 0 calc((100% / 4) - 2rem);
+    }
+}

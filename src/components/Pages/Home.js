@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 // layout
-import { PromoOffer } from "../Layout";
+import { PromoOffer, OurServices } from "../Layout";
 
 // data
 import { heroImageData } from "../../data";
@@ -214,6 +214,7 @@ const Home = () => {
       </section>
       {/* END OF TOP PRODUCT SECTION */}
       <PromoOffer/>
+      <OurServices/>
     </div>
   );
 };

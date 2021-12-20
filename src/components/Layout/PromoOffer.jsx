@@ -11,7 +11,7 @@ const PromoOffer = () => {
             <h1>Up to 35% off on all items.</h1>
             <p>Last chance to take advantage of our discounts!</p>
             <form onSubmit={(e)=>e.preventDefault()}>
-              <input type="email" name="" id="" />
+              <input type="email" name="" id=""  placeholder='Your email address'/>
               <button type="submit">subscribe</button>
             </form>
           </div>

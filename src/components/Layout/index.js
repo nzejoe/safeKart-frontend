@@ -1,3 +1,4 @@
 import PromoOffer from "./PromoOffer";
+import OurServices from "./OurServices";
 
-export {PromoOffer}
+export { PromoOffer, OurServices };
