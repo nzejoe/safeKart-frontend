@@ -130,6 +130,7 @@
 .section__category h1 {
   font-size: 4rem;
   margin: 5rem 0;
+  text-transform: uppercase;
 }
 
 .top__categories {
@@ -186,6 +187,7 @@
 .section__top_products h1 {
   font-size: 4rem;
   margin: 5rem 0;
+  text-transform: uppercase;
 }
 .top__products{
   width: 100%;
@@ -226,6 +228,20 @@
 .product__body h4{
   font-size: 1.5rem;
   color: var(--dark-color-2);
+}
+
+.section__top_products a:not(.product__body a){
+  font-size: 2rem;
+  padding: 1rem 3rem;
+  color: #000;
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  transition: background 1s;
+}
+
+.section__top_products a:not(.product__body a):hover{
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .product__body span{

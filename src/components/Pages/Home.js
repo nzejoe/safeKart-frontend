@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-import Product from "../Products/Product";
+// layout
+import { PromoOffer } from "../Layout";
+
 // data
 import { heroImageData } from "../../data";
 // styles
@@ -143,7 +145,7 @@ const Home = () => {
             </form>
           </div>
           <Outlet /> */}
-          
+
       {/* TOP CATEGORY SECTION */}
       <section className={`section ${styles.top__cat_section}`}>
         <div className="section__wrapper">
@@ -178,7 +180,7 @@ const Home = () => {
       {/* TOP PRODUCT SECTION */}
       <section className={`section ${styles.section__top_products}`}>
         <div className="section__wrapper">
-          <h1>Top selling products</h1>
+          <h1>best sellers</h1>
           <div className={styles.top__products}>
             {topProducts.map((product) => {
               return (
@@ -206,11 +208,12 @@ const Home = () => {
             })}
           </div>
           <Link to="store" className="btn__primary">
-            View all
+            View more
           </Link>
         </div>
       </section>
       {/* END OF TOP PRODUCT SECTION */}
+      <PromoOffer/>
     </div>
   );
 };

@@ -1,0 +1,65 @@
+.section__promo {
+  background-color: var(--primary-color-light-2);
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.promo h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  color: var(--dark-trans-2);
+}
+
+.promo h1 {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+.promo p {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.promo form {
+  width: 100%;
+}
+
+.promo input {
+  display: inline-block;
+  width: 80%;
+  outline: none;
+  border: 1px solid var(--primary-color-light);
+  border-top-left-radius: 10em;
+  border-bottom-left-radius: 10em;
+  height: 3em;
+  padding: 0.5rem 1rem;
+}
+
+.promo input:focus{
+    box-shadow: inset var(--light-shadow-2);
+}
+
+.promo button {
+  width: 20%;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 1rem;
+  border-top-right-radius: 10em;
+  border-bottom-right-radius: 10em;
+  border: 1px solid var(--primary-color-light);
+  background-color: transparent;
+  cursor: pointer;
+  transition: background 1s;
+}
+
+.promo button:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+@media screen and (min-width: 800px) {
+    .promo form{
+        width: 80%;
+        margin: auto;
+    }
+}
