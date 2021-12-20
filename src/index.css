@@ -11,10 +11,12 @@
   --dark-trans: rgba(0, 0, 0, 0.404);
   --dark-trans-2: rgba(0, 0, 0, 0.322);
   --dark-trans-3: rgba(0, 0, 0, 0.178);
+  --color-gray: rgb(224, 224, 224);
+  --color-gray-dark: rgb(80, 80, 80);
   --light-color-trans: rgba(255, 255, 255, 0.425);
   --light-shadow: 0 0 1px rgba(0, 0, 0, 0.795);
-  --light-shadow-2: 0 0 10px var(--primary-color-light);
   --light-shadow-1: 0 0 10px rgba(0, 0, 0, 0.212);
+  --light-shadow-2: 0 0 10px var(--primary-color-light);
 }
 
 *,

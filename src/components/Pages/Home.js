@@ -43,7 +43,6 @@ const Home = () => {
   //   }
   // }, [query, navigate]);
 
-  console.log(topCategories);
 
   // TOP CATEGORY
   useEffect(() => {
@@ -155,7 +154,7 @@ const Home = () => {
               {topCategories &&
                 topCategories.map((category) => {
                   return (
-                    <div className={styles.category}>
+                    <div className={styles.category} key={category.id}>
                       <div className={styles.category__img_container}>
                         <img
                           src={`http://localhost:8000${category.image}`}
@@ -184,7 +183,7 @@ const Home = () => {
           <div className={styles.top__products}>
             {topProducts.map((product) => {
               return (
-                <div className={styles.product}>
+                <div className={styles.product} key={product.id}>
                   <div className={styles.product__img_container}>
                     <img
                       src={`http://localhost:8000${product.image}`}

@@ -6,7 +6,7 @@ import axios from "axios";
 // redux
 import { actions as userActions } from "./store/user-slice";
 
-import Header from './components/Layout/Header';
+import { Base } from "./components/Layout";
 // pages
 import {
   Home,
@@ -47,68 +47,69 @@ function App() {
 
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} >
-          <Route path="search" element={<HomeSearch/>}/>
-        </Route>
-        <Route path="store/" element={<Store />} />
-        <Route path="store/:slug/" element={<ProductDetailPage />} exact />
-        <Route
-          path="accounts/login/"
-          element={<PublicRoute children={<LoginPage />} />}
-          exact
-        />
-        <Route
-          path="accounts/register/"
-          element={<PublicRoute children={<UserRegisterPage />} />}
-          exact
-        />
-        <Route
-          path="accounts/password_change/"
-          element={<PrivateRoute children={<PasswordChangePage />} />}
-          exact
-        />
-        <Route
-          path="accounts/password_reset/"
-          element={<PublicRoute children={<PasswordResetPage />} />}
-          exact
-        />
-        <Route
-          path="accounts/password_reset_complete/"
-          element={<PublicRoute children={<PasswordResetComplete />} />}
-          exact
-        />
-        <Route
-          path="accounts/password_reset_confirm/:uidb64/:token"
-          element={<PublicRoute children={<PasswordResetConfirm />} />}
-          exact
-        />
-        <Route path="carts/" element={<CartPage />} exact />
-        <Route
-          path="checkout/"
-          element={<PrivateRoute children={<CheckoutPage />} />}
-          exact
-        />
-        <Route
-          path="place_order/"
-          element={<PrivateRoute children={<PlaceOrderPage />} />}
-          exact
-        />
-        <Route
-          path="order_confirmed/"
-          element={<PrivateRoute children={<OrderConfirmedPage />} />}
-        />
-        <Route
-          path="order_history/"
-          element={<PrivateRoute children={<OrderHistoryPage />} />}
-        />
-        <Route
-          path="order_history/:order_number/"
-          element={<PrivateRoute children={<OrderDetailPage />} />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Base>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="search" element={<HomeSearch />} />
+          </Route>
+          <Route path="store/" element={<Store />} />
+          <Route path="store/:slug/" element={<ProductDetailPage />} exact />
+          <Route
+            path="accounts/login/"
+            element={<PublicRoute children={<LoginPage />} />}
+            exact
+          />
+          <Route
+            path="accounts/register/"
+            element={<PublicRoute children={<UserRegisterPage />} />}
+            exact
+          />
+          <Route
+            path="accounts/password_change/"
+            element={<PrivateRoute children={<PasswordChangePage />} />}
+            exact
+          />
+          <Route
+            path="accounts/password_reset/"
+            element={<PublicRoute children={<PasswordResetPage />} />}
+            exact
+          />
+          <Route
+            path="accounts/password_reset_complete/"
+            element={<PublicRoute children={<PasswordResetComplete />} />}
+            exact
+          />
+          <Route
+            path="accounts/password_reset_confirm/:uidb64/:token"
+            element={<PublicRoute children={<PasswordResetConfirm />} />}
+            exact
+          />
+          <Route path="carts/" element={<CartPage />} exact />
+          <Route
+            path="checkout/"
+            element={<PrivateRoute children={<CheckoutPage />} />}
+            exact
+          />
+          <Route
+            path="place_order/"
+            element={<PrivateRoute children={<PlaceOrderPage />} />}
+            exact
+          />
+          <Route
+            path="order_confirmed/"
+            element={<PrivateRoute children={<OrderConfirmedPage />} />}
+          />
+          <Route
+            path="order_history/"
+            element={<PrivateRoute children={<OrderHistoryPage />} />}
+          />
+          <Route
+            path="order_history/:order_number/"
+            element={<PrivateRoute children={<OrderDetailPage />} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Base>
     </Router>
   );
 }

@@ -5,7 +5,7 @@
 .service{
     margin: 5em 0;
     text-align: center;
-    color: var(--dark-color);
+    color: var(--color-gray-dark);
 }
 
 .service h5{
