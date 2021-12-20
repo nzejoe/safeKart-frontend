@@ -11,8 +11,6 @@ const ModalSearch = ({ query, setIsSearching, setQuery, closeSearch }) => {
   const [matchedProducts, setMatchProducts] = useState([]);
   const dispatch = useDispatch();
 
-  console.log(matchedProducts)
-
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);

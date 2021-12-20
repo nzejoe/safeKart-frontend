@@ -350,6 +350,7 @@ a.cart__link {
     position: absolute;
     right: 0;
     top: 3rem;
+    z-index: 2;
   }
 
   .user__info_wrapper {

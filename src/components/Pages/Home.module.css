@@ -79,7 +79,6 @@
   /* font-weight: 100; */
 }
 
-
 .slide__info_link {
   animation: animateLink 1s;
   animation-delay: 1.8s;
@@ -121,6 +120,124 @@
 .slide__btn:hover::after {
   background-color: var(--primary-color);
 }
+
+/* CATEGORY */
+.section__category {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.section__category h1 {
+  font-size: 4rem;
+  margin: 5rem 0;
+}
+
+.top__categories {
+  height: auto;
+}
+.category {
+  box-shadow: var(--light-shadow);
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.category:hover{
+  box-shadow: var(--light-shadow-1);
+}
+.category__img_container {
+  width: 100%;
+  height: 100%;
+}
+.category__img_container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s;
+}
+
+.category__info {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+.category h2 {
+  font-size: 2.5em;
+}
+
+.category__info a {
+  margin-top: 1.5rem;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.category:hover img {
+  transform: scale(1.1);
+}
+/* END OF CATEGORY */
+
+/* TOP PRODUCTS */
+.section__top_products {
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.section__top_products h1 {
+  font-size: 4rem;
+  margin: 5rem 0;
+}
+.top__products{
+  width: 100%;
+}
+
+.product{
+  height: auto;
+  margin: 5rem auto;
+  width: 80%;
+  box-shadow: var(--light-shadow);
+  padding: 2rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product__img_container{
+  height: 30rem;
+  width: 100%;
+}
+
+.product__img_container img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.product__body{
+  width: 100%;
+}
+
+.product__body a{
+  background-color: #000;
+  color: #fff;
+}
+
+.product__body h4{
+  font-size: 1.5rem;
+  color: var(--dark-color-2);
+}
+
+.product__body span{
+  display: inline-block;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+
+/* END OF TOP PRODUCTS */
 
 /* ANIMATION */
 
@@ -207,6 +324,28 @@
     top: 5rem;
     left: 5rem;
   }
+
+  .top__categories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .category {
+    /* margin: 2rem; */
+    flex: 0 0 calc((100% / 2) - 1rem);
+  }
+
+  /* top products section */
+  .top__products{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .product{
+    flex: 0 0 calc((100% / 2) - 1rem);
+  }
+  /* end of top products section */
 }
 
 @media screen and (min-width: 768px) {
@@ -234,6 +373,7 @@
     font-size: 2rem;
     left: 5rem;
   }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -250,7 +390,7 @@
   }
 }
 
-@media screen and (min-width: 1050px) {
+@media screen and (min-width: 1024px) {
   .hero {
     height: calc(100vh - 7rem);
   }
@@ -263,4 +403,10 @@
   .slide__info_2 {
     top: 20rem;
   }
+
+  /* top products section */
+  .product{
+    flex: 0 0 calc((100% / 3) - 1rem);
+  }
+  /* end of top products section */
 }

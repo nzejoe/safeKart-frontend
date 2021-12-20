@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Product = ({ product, grid }) => {
     return (
-      <React.Fragment>
+      <div className="product">
         {grid ? (
           // GRID VIEW
           <div style={{ marginBottom: "10px" }}>
@@ -50,7 +50,7 @@ const Product = ({ product, grid }) => {
             </div>
           </div>
         )}
-      </React.Fragment>
+      </div>
     );
 }
 

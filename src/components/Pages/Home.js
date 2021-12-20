@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 import Product from "../Products/Product";
@@ -11,14 +11,15 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   document.title = "Home | SafeKart";
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
+  const [topCategories, setTopCategories] = useState([]);
   const [topProducts, setTopProducts] = useState([]);
   // hero image slider
   const [activeImage, setActiveImage] = useState(0);
 
   const sliderRef = useRef();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,14 +33,31 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, [activeImage]);
 
-  useEffect(() => {
-    if (query) {
-      navigate(`search?query=${query}`);
-    } else {
-      navigate("/");
-    }
-  }, [query, navigate]);
+  // useEffect(() => {
+  //   if (query) {
+  //     navigate(`search?query=${query}`);
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [query, navigate]);
 
+  console.log(topCategories);
+
+  // TOP CATEGORY
+  useEffect(() => {
+    const getTopProducts = async () => {
+      await axios
+        .get("/products/categories/")
+        .then((res) => {
+          setTopCategories(res.data);
+        })
+        .catch((error) => console.log(error));
+    };
+
+    getTopProducts();
+  }, []);
+
+  // TOP PRODUCTS
   useEffect(() => {
     const getTopProducts = async () => {
       await axios
@@ -59,67 +77,58 @@ const Home = () => {
   };
 
   return (
-    <section className={` `}>
-      <div className="">
-        <div>
-          {/* HERO */}
-          <div className={styles.hero}>
-            <div className={styles.slide__viewer}>
-              <div className={styles.slider} ref={sliderRef}>
-                {heroImageData.map((item, index) => {
-                  return (
-                    <div
-                      className={`${styles.slide} ${
-                        activeImage === index && styles.slide__active
-                      }`}
-                      key={index}
-                    >
-                      <img src={item.url} alt="" />
-                      <div
-                        className={`${styles.slide__info} ${
-                          index === 0
-                            ? styles.slide__info_1
-                            : styles.slide__info_2
-                        }`}
+    <div>
+      {/* HERO */}
+      <div className={styles.hero}>
+        <div className={styles.slide__viewer}>
+          <div className={styles.slider} ref={sliderRef}>
+            {heroImageData.map((item, index) => {
+              return (
+                <div
+                  className={`${styles.slide} ${
+                    activeImage === index && styles.slide__active
+                  }`}
+                  key={index}
+                >
+                  <img src={item.url} alt="" />
+                  <div
+                    className={`${styles.slide__info} ${
+                      index === 0 ? styles.slide__info_1 : styles.slide__info_2
+                    }`}
+                  >
+                    <h4 className={styles.slide__info_hash}> {item.hash}</h4>
+                    <h3 className={styles.slide__info_header}>{item.header}</h3>
+                    <p className={styles.slide__info_text}>{item.text}</p>
+                    <div className={styles.link__container}>
+                      <Link
+                        to="store"
+                        className={`${styles.slide__info_link} btn__primary`}
                       >
-                        <h4 className={styles.slide__info_hash}>
-                          {" "}
-                          {item.hash}
-                        </h4>
-                        <h3 className={styles.slide__info_header}>
-                          {item.header}
-                        </h3>
-                        <p className={styles.slide__info_text}>{item.text}</p>
-                        <div className={styles.link__container}>
-                          <Link
-                            to="store"
-                            className={`${styles.slide__info_link} btn__primary`}
-                          >
-                            {item.link}
-                          </Link>
-                        </div>
-                      </div>
+                        {item.link}
+                      </Link>
                     </div>
-                  );
-                })}
-              </div>
-              {/* SLIDE BUTTONS */}
-              <div className={styles.slide__btns}>
-                {heroImageData.map((img, index) => {
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => changeSlide(index)}
-                      className={`${styles.slide__btn} ${
-                        activeImage === index && styles.slide__btn_active
-                      }`}
-                    ></button>
-                  );
-                })}
-              </div>
-            </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <div>
+          {/* SLIDE BUTTONS */}
+          <div className={styles.slide__btns}>
+            {heroImageData.map((img, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={() => changeSlide(index)}
+                  className={`${styles.slide__btn} ${
+                    activeImage === index && styles.slide__btn_active
+                  }`}
+                ></button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      {/* <div>
             <form onSubmit={(e) => e.preventDefault()}>
               <div>
                 <input
@@ -133,20 +142,76 @@ const Home = () => {
               </div>
             </form>
           </div>
-          <Outlet />
-          <div>
-            <h4> home Page</h4>
-          </div>
-          <div className="top__products">
-            <h3>Top selling products</h3>
-            {topProducts.map((product) => {
-              return <Product product={product} key={product.id} grid={true} />; // set it to grid view
-            })}
-            <Link to="store">View all</Link>
+          <Outlet /> */}
+          
+      {/* TOP CATEGORY SECTION */}
+      <section className={`section ${styles.top__cat_section}`}>
+        <div className="section__wrapper">
+          <div className={styles.section__category}>
+            <h1>Top categories</h1>
+            <div className={styles.top__categories}>
+              {topCategories &&
+                topCategories.map((category) => {
+                  return (
+                    <div className={styles.category}>
+                      <div className={styles.category__img_container}>
+                        <img
+                          src={`http://localhost:8000${category.image}`}
+                          alt={category.product_name}
+                        ></img>
+                        <div className={styles.category__info}>
+                          <h2>{category.name}</h2>
+                          <Link to="store" className="btn__link">
+                            shop now
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {/* END OF TOP CATEGORY SECTION */}
+
+      {/* TOP PRODUCT SECTION */}
+      <section className={`section ${styles.section__top_products}`}>
+        <div className="section__wrapper">
+          <h1>Top selling products</h1>
+          <div className={styles.top__products}>
+            {topProducts.map((product) => {
+              return (
+                <div className={styles.product}>
+                  <div className={styles.product__img_container}>
+                    <img
+                      src={`http://localhost:8000${product.image}`}
+                      alt={product.product_name}
+                    ></img>
+                  </div>
+                  <div className={styles.product__body}>
+                    <h4>{product.product_name}</h4>
+                    <div>
+                      <span>$</span>
+                      <span>{product.price}</span>
+                    </div>
+                    <div>
+                      <Link to={`/store/${product.slug}`} className="btn__link">
+                        view
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ); // set it to grid view
+            })}
+          </div>
+          <Link to="store" className="btn__primary">
+            View all
+          </Link>
+        </div>
+      </section>
+      {/* END OF TOP PRODUCT SECTION */}
+    </div>
   );
 };
 
