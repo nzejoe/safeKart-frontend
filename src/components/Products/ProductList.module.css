@@ -21,6 +21,13 @@
   color: #fff;
 }
 
+.price {
+  /* margin: .5em 0; */
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
 /* GRID VIEW */
 .grid__product {
   text-align: center;
@@ -45,6 +52,10 @@
 
 .grid__product_body {
   margin-top: 2em;
+}
+
+.grid__product_body h4{
+  text-align: left;
 }
 
 .grid__product > div > div {
@@ -91,6 +102,9 @@
   font-size: 1.5em;
   margin-bottom: 1em;
 }
+.list__product .price {
+  margin: 1em 0;
+}
 /* END OF LIST VIEW */
 
 .link {
@@ -111,13 +125,6 @@
 
 .list__product .link {
   background-color: var(--primary-color);
-}
-
-.price {
-  margin: 1rem 0;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: var(--primary-color);
 }
 
 .list__product .price {
