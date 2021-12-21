@@ -76,19 +76,27 @@ const ProductList = () => {
           <h4>Sorry! No product matches your search patterns...</h4>
         )}
       </div>
+
       {/* PAGINATION BUTTONS */}
       {products && products.length > 1 && (
-        <div className="page__btns">
+        <div className={styles.page__btns}>
           {page > 0 ? (
-            <button onClick={() => handlePage(page - 1)}>Prev</button>
+            <button
+              onClick={() => handlePage(page - 1)}
+              className={styles.prev}
+            >
+              Prev
+            </button>
           ) : (
-            <button>Prev</button>
+            <button className={`${styles.prev} ${styles.disabled}`}>
+              Prev
+            </button>
           )}
           {products.map((product, index) => {
             return (
               <button
                 key={index}
-                className={`${page === index && "active"}`}
+                className={`${page === index && styles.active__page}`}
                 onClick={() => handlePage(index)}
               >
                 {index + 1}
@@ -96,9 +104,16 @@ const ProductList = () => {
             );
           })}
           {page < products.length - 1 ? (
-            <button onClick={() => handlePage(page + 1)}>Next</button>
+            <button
+              onClick={() => handlePage(page + 1)}
+              className={styles.next}
+            >
+              Next
+            </button>
           ) : (
-            <button>Next</button>
+            <button className={`${styles.next} ${styles.disabled}`}>
+              Next
+            </button>
           )}
         </div>
       )}

@@ -124,6 +124,39 @@
   margin-top: 0.2em !important;
 }
 
+.page__btns{
+  margin: 2em 0;
+}
+
+.page__btns button{
+  font-size: 1.5em;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid var(--primary-color-light-2);
+  padding: .5em 1em;
+  transition: all .3s;
+}
+
+.page__btns button:not(.disabled):active{
+  transform: scale(.9);
+}
+
+.page__btns .active__page, 
+.page__btns button:not(.disabled):hover{
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.prev{
+  border-top-left-radius: 10em;
+  border-bottom-left-radius: 10em;
+}
+
+.next{
+  border-top-right-radius: 10em;
+  border-bottom-right-radius: 10em;
+}
+
 /* SCREEN SIZE */
 
 @media screen and (min-width: 600px) {
