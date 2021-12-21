@@ -5,6 +5,7 @@
   --primary-color-dark: #2465b9d8;
   --primary-color-light: #6c91c2b9;
   --primary-color-light-2: #6c91c242;
+  --primary-color-light-3: #6c91c21e;
   --dark-color: rgba(0, 0, 0, 0.822);
   --dark-color-2: rgba(0, 0, 0, 0.527);
   --dark-color-2: rgba(0, 0, 0, 0.726);
@@ -70,6 +71,7 @@ code {
   text-transform: capitalize;
   border-radius: 10rem;
   padding: .5rem 1rem;
+  font-size: 1.3rem;
 }
 
 /* END OF UI */

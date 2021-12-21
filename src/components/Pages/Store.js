@@ -1,8 +1,10 @@
 import React from "react";
+// style
+import styles from './Store.module.css'
 
 
 import ProductList from "../Products/ProductList";
-import ProductFilter from "../UI/ProductFilter";
+import ProductFilter from "../Layout/ProductFilter";
 
 const Store = () => {
   document.title = "Store | SafeKart";
@@ -10,8 +12,8 @@ const Store = () => {
   return (
     <section className={`section `}>
       <div className="section__wrapper">
-        <div style={{ display: "flex" }}>
-          <ProductFilter/>
+        <div className={styles.content}>
+          <ProductFilter />
           <ProductList />
         </div>
       </div>

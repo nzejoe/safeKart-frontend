@@ -1,0 +1,20 @@
+.content{
+
+}
+
+
+@media screen and (min-width: 800px) {
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .content main{
+    margin-left: 2em;
+  }
+
+  .content aside{
+    
+  }
+
+}

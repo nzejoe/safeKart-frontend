@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+// icons
+import { BsFillGridFill, BsList } from "react-icons/bs";
 
 import {
   getProducts,
@@ -10,14 +12,16 @@ import Product from "./Product";
 
 // utils
 import { getPaginatedProducts } from "../../utils";
+// style
+import styles from "./ProductList.module.css";
 
 const ProductList = () => {
   const { filteredProducts, filter } = useSelector((state) => state.products);
- 
-  const [page, setPage] = useState(0);
-  const [grid, setGrid] = useState(true);
 
- const products = getPaginatedProducts(filteredProducts)
+  const [page, setPage] = useState(0);
+  const [grid, setGrid] = useState(false);
+
+  const products = getPaginatedProducts(filteredProducts);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,25 +33,50 @@ const ProductList = () => {
     setPage(0); // reset page number when filtering
   }, [dispatch, filter]);
 
-
   const handlePage = (index) => {
     setPage(index);
   };
 
   return (
-    <div>
-      <div className="products__view_switch">
+    <main>
+      <div className={styles.product__view_switch}>
         {/* GRID TOGGLE BUTTONS*/}
-        <button onClick={() => setGrid(true)}>Grid</button>
-        <button onClick={() => setGrid(false)}>List</button>
+        <BsFillGridFill
+          className={`${styles.switch__view_btn} ${
+            grid ? styles.btn__active : ""
+          }`}
+          onClick={() => setGrid(true)}
+          title="Grid view"
+        />
+        <BsList
+          className={`${styles.switch__view_btn} ${
+            !grid ? styles.btn__active : ""
+          }`}
+          onClick={() => setGrid(false)}
+          title="List view"
+        />
       </div>
-      {products ? (
-        products[page].map((product) => {
-          return <Product key={product.id} product={product} grid={grid} />;
-        })
-      ) : (
-        <h4>Sorry! No product matches your search patterns...</h4>
-      )}
+      <div
+        className={`${styles.product__container} ${
+          grid ? styles.product__grid : styles.product__list
+        }`}
+      >
+        {products ? (
+          products[page].map((product) => {
+            return (
+              <Product
+                key={product.id}
+                product={product}
+                grid={grid}
+                styles={styles}
+              />
+            );
+          })
+        ) : (
+          <h4>Sorry! No product matches your search patterns...</h4>
+        )}
+      </div>
+      {/* PAGINATION BUTTONS */}
       {products && products.length > 1 && (
         <div className="page__btns">
           {page > 0 ? (
@@ -73,7 +102,7 @@ const ProductList = () => {
           )}
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

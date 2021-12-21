@@ -65,7 +65,7 @@ const ProductFilter = () => {
   };
 
   return (
-    <div className="filter">
+    <aside className="filter">
       <div>
         <input
           type="search"
@@ -137,7 +137,7 @@ const ProductFilter = () => {
       <div>
         <button onClick={clearFilter}>clear filter</button>
       </div>
-    </div>
+    </aside>
   );
 };
 

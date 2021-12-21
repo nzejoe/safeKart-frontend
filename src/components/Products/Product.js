@@ -1,57 +1,67 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Product = ({ product, grid }) => {
-    return (
-      <div className="product">
-        {grid ? (
-          // GRID VIEW
-          <div style={{ marginBottom: "10px" }}>
-            <div className="image-comtainer">
-              <img
-                src={`http://localhost:8000${product.image}`}
-                alt={product.product_name}
-                width="100px"
-              ></img>
-            </div>
-            <div className="product-body">
-              <h4>{product.product_name}</h4>
-              <div>
-                <span>{product.price}</span>
-              </div>
-              <div>
-                <Link to={`/store/${product.slug}`}>view</Link>
-              </div>
-            </div>
+const Product = ({ product, grid, styles }) => {
+  return (
+    <>
+      {grid ? (
+        // GRID VIEW
+        <div className={styles.grid__product}>
+          <div className={styles.image__container}>
+            <img
+              src={`http://localhost:8000${product.image}`}
+              alt={product.product_name}
+            ></img>
           </div>
-        ) : (
-          // LIST VIEW
-          <div style={{ marginBottom: "10px", display: "flex", alignItems: 'center' }}>
-            <div className="image-comtainer">
-              <img
-                src={`http://localhost:8000${product.image}`}
-                alt={product.product_name}
-                width="100px"
-              ></img>
-            </div>
-            <div className="product-body">
-              <h4>{product.product_name}</h4>
-              <div>
-                <span>{product.price}</span>
-              </div>
-              <p>
-                {product.description.length > 100
-                  ? product.description.substring(0, 300) + "..."
-                  : product.description}
+          <div className={styles.grid__product_body}>
+            <h4>{product.product_name}</h4>
+            <div>
+              <p className={styles.price}>
+                $<span>{product.price}</span>
               </p>
-              <div>
-                <Link to={`/store/${product.slug}`}>view</Link>
-              </div>
+              <Link
+                to={`/store/${product.slug}`}
+                className={`btn__link ${styles.link}`}
+              >
+                view details
+              </Link>
             </div>
           </div>
-        )}
-      </div>
-    );
-}
+        </div>
+      ) : (
+        // LIST VIEW
+        <div className={styles.list__product}>
+          <div className={styles.image__container}>
+            <img
+              src={`http://localhost:8000${product.image}`}
+              alt={product.product_name}
+            ></img>
+          </div>
+          <div className={styles.list__product_body}>
+            <div>
+              <h4>{product.product_name}</h4>
+              <p className={styles.price}>
+                $<span>{product.price}</span>
+              </p>
+            </div>
+            <p className={styles.product__desc}>
+              {product.description.length > 300
+                ? product.description.substring(0, 300) + "..."
+                : product.description}
+            </p>
+            <div>
+              <Link
+                to={`/store/${product.slug}`}
+                className={`btn__link ${styles.link}`}
+              >
+                view
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default Product;
