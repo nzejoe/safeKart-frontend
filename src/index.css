@@ -85,25 +85,6 @@ table td {
   padding: 0.5rem 1rem;
 }
 
-.filter > div {
-  margin-bottom: 2rem;
-}
-
-.filter > div h4 {
-  margin-bottom: 1rem;
-}
-
-.filter button {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.filter .active,
-.page__btns .active {
-  background-color: brown;
-  color: white;
-}
-
 /* rating */
 .review .rating__stars {
   margin-right: 2rem;

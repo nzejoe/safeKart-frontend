@@ -11,10 +11,11 @@
 
   .content main{
     margin-left: 2em;
+    flex: 1 0 calc((100% / 2) - 2em);
   }
 
   .content aside{
-    
+    /* flex: 0 0 calc((100% / 2) - 2em); */
   }
 
 }

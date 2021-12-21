@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// icons
+import { BsCheckCircle } from "react-icons/bs";
 
 // store
 import { actions as productActions } from "../../store/product-slice";
 // utils
 import { getUniqueValues, getUniqueCategory, getMaxPrice } from "../../utils";
+// style
+import styles from "./ProductFilter.module.css";
 
 const ProductFilter = () => {
   const { allProducts } = useSelector((state) => state.products);
@@ -20,6 +24,8 @@ const ProductFilter = () => {
   const brands = getUniqueValues(allProducts, "brand");
   const categories = getUniqueCategory(allProducts);
 
+  // console.log(colors);
+
   useEffect(() => {
     dispatch(productActions.searchFilter(query));
   }, [query, dispatch]);
@@ -32,8 +38,8 @@ const ProductFilter = () => {
     setQuery(e.target.value);
   };
 
-  const filterByColor = (e) => {
-    const color = e.target.dataset.color;
+  
+  const filterByColor = (color) => {
     setColor(color);
     dispatch(productActions.colorFilter(color));
   };
@@ -65,8 +71,8 @@ const ProductFilter = () => {
   };
 
   return (
-    <aside className="filter">
-      <div>
+    <aside className={styles.filter}>
+      <div className={styles.search}>
         <input
           type="search"
           placeholder="search"
@@ -74,7 +80,7 @@ const ProductFilter = () => {
           onChange={onSearchChange}
         />
       </div>
-      <div>
+      <div className={styles.category}>
         <h4>Category</h4>
         {categories.map((category) => {
           return (
@@ -82,29 +88,39 @@ const ProductFilter = () => {
               data-category={category}
               key={categories.indexOf(category)}
               onClick={filterByCategory}
-              className={`${selectedCategory === category && "active"}`}
+              className={`${selectedCategory === category && styles.active}`}
             >
               {category}
             </button>
           );
         })}
       </div>
-      <div>
+      <div className={styles.color}>
         <h4>Colors</h4>
-        {colors.map((color) => {
-          return (
-            <button
-              data-color={color}
-              key={colors.indexOf(color)}
-              onClick={filterByColor}
-              className={`${selectedColor === color && "active"}`}
-            >
-              {color}
-            </button>
-          );
-        })}
+        <div className={styles.color__btn_container}>
+          {colors.map((color, index) => {
+            return (
+              <button
+                key={index}
+                data-color={color}
+                onClick={() => {
+                  filterByColor(color);
+                }}
+                className={`${selectedColor === color && styles.active}`}
+                style={{ backgroundColor: `${color.toLowerCase()}` }}
+              >
+                {color === "all" ? color : ""}
+                {color === selectedColor ? (
+                  <BsCheckCircle className={styles.icon} />
+                ) : (
+                  ""
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
-      <div>
+      <div className={styles.brand}>
         <h4>Brands</h4>
         <select name="" id="" onChange={filterByBrand} value={selectedBrand}>
           {brands.map((brand) => {
@@ -112,7 +128,7 @@ const ProductFilter = () => {
               <option
                 data-brand={brand}
                 key={brands.indexOf(brand)}
-                className={`${selectedBrand === brand && "active"}`}
+                className={`${selectedBrand === brand && styles.active}`}
               >
                 {brand}
               </option>
@@ -120,7 +136,7 @@ const ProductFilter = () => {
           })}
         </select>
       </div>
-      <div>
+      <div className={styles.price}>
         <h4>Price</h4>
         <p>
           $<span>{price}</span>
@@ -134,7 +150,7 @@ const ProductFilter = () => {
           value={price}
         />
       </div>
-      <div>
+      <div className={styles.clear__btn}>
         <button onClick={clearFilter}>clear filter</button>
       </div>
     </aside>

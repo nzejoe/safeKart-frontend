@@ -19,7 +19,7 @@ const ProductList = () => {
   const { filteredProducts, filter } = useSelector((state) => state.products);
 
   const [page, setPage] = useState(0);
-  const [grid, setGrid] = useState(false);
+  const [grid, setGrid] = useState(true);
 
   const products = getPaginatedProducts(filteredProducts);
 

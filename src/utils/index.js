@@ -63,7 +63,6 @@ export const getUniqueValues = (arr, type) => {
             let { variations } = item;
             unique.push(...new Set(variations[type])); // this will get the colors instead of color arrays
         })
-
         return ["all", ...new Set(unique)];
     }
 }
