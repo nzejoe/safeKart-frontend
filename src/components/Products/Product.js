@@ -23,7 +23,7 @@ const Product = ({ product, grid, styles }) => {
                 to={`/store/${product.slug}`}
                 className={`btn__link ${styles.link}`}
               >
-                view details
+                View details
               </Link>
             </div>
           </div>

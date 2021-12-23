@@ -1,0 +1,132 @@
+.image__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image__container > div:not(:last-child){
+  margin-right: 2em;
+}
+
+.default__img{
+  width: 100%;
+  height: 100%;
+}
+
+.default__img img{
+  width: 100%;
+}
+
+.product__info h5 {
+  font-size: 2em;
+  /* margin-bottom: 1em; */
+}
+
+.product__price{
+  font-size: 2em;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.product__form{
+  margin-top: 2em;
+}
+
+.product__form form > div{
+  margin-bottom: 2em;
+}
+
+.variation__title {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  color: var(--dark-color-2);
+  text-transform: capitalize;
+}
+
+.form__group{
+  display: inline-block;
+  margin-right: .2em;
+}
+
+.form__group input{
+  display: none;
+}
+
+.form__group label{
+  width: 4em;
+  height: 3em;
+  padding: .5rem;
+  font-weight: bold;
+  background-color: var(--dark-trans-3);
+  color: #fff;
+  text-transform: capitalize;
+  transition: background .3s;
+}
+
+label.selected, 
+.form__group label:hover{
+   background-color: var(--dark-color-2);
+  color: #fff;
+}
+
+.quantity > div{
+  margin-top: .5em;
+  height: 4em;
+}
+
+.quantity input{
+  display: inline-block;
+  width: 2.5em;
+  height: 100%;
+  font-size: 2em;
+  padding: .5em;
+  border: none;
+  outline: none;
+  border-top: 1px solid var(--dark-trans-2);
+  border-bottom: 1px solid var(--dark-trans-2);
+  position: relative;
+  top: -3.5px;
+}
+
+.quantity span{
+  height: 100%;
+  cursor: pointer;
+  font-size: 2em;
+  padding: .1rem 1em;
+  border: 1px solid var(--dark-trans-2);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background .3s transform .5s;
+}
+
+.quantity span:hover{
+  background-color: var(--dark-trans-2);
+  color: #fff;
+}
+
+.quantity span:active{
+  transform: scale(.97);
+}
+
+.minus{
+  border-top-left-radius: 10rem;
+  border-bottom-left-radius: 10rem;
+}
+
+.plus{
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+}
+
+@media screen and (min-width: 800px) {
+  .product__detail {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  .product__detail > div{
+    margin-right: 2em;
+  }
+}

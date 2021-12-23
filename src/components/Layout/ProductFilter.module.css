@@ -77,19 +77,3 @@
   border-bottom: 1em;
 }
 
-.clear__btn button{
-  background-color: transparent;
-  border: 1px solid var(--primary-color);
-  border-radius: 10em;
-  font-size: 1.5em;
-  padding: .5em 1em;
-  text-transform: capitalize;
-  cursor: pointer;
-  transition: background .3s;
-}
-
-.clear__btn button:hover{
-  color: #fff;
-  background-color: var(--primary-color);
-}
-

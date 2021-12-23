@@ -2,12 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+// icons
+import { FiPlus, FiMinus } from 'react-icons/fi'
+// style
+import styles from "./ProductDetail.module.css";
 
 // state
 import { addToCart } from "../../store/cart-slice";
 
 import UserReview from "../Products/UserReview";
-
 // ui
 import { NotFound } from ".";
 import ReviewStar from "../UI/ReviewStar";
@@ -25,8 +28,10 @@ const ProductDetailPage = () => {
   const [sizes, setSizes] = useState(null);
   const [brand, setBrand] = useState(null);
 
+  // ADD TO CART
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   const [formHasError, setFormHasError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -91,6 +96,7 @@ const ProductDetailPage = () => {
       setErrorMsg("Please choose size.");
     } else {
       setFormHasError(false);
+      setErrorMsg("");
     }
   }, [colors, selectedColor, sizes, selectedSize]);
 
@@ -102,20 +108,6 @@ const ProductDetailPage = () => {
       setMyReview(review);
     }
   }, [alreadyReviewed, authUser, reviews]);
-
-  // form submit
-  const addItemHandler = (e) => {
-    e.preventDefault();
-    if (!formHasError) {
-      const data = {
-        product_id: product.id,
-        color: selectedColor,
-        size: selectedSize,
-        brand: brand || null,
-      };
-      dispatch(addToCart({ data, token }));
-    }
-  };
 
   const handleColorChange = (e) => {
     setSelectedColor(e.target.value);
@@ -130,115 +122,198 @@ const ProductDetailPage = () => {
     refreshPage(refresh + 1);
   }, [refresh]);
 
+  // quantity value change handler
+  const handleQuantityChange = (quantity) => {
+    const maxValue = product && product.stock;
+    let value =  parseInt(quantity);
+
+    if (value > maxValue) {
+      setQuantity(maxValue);
+    } else if (value < 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(value);
+    }
+  };
+
+  // always check if user try to clear input value
+  // because if they do if will result in error 
+  useEffect(()=>{
+     if (Number.isNaN(quantity)) {
+       setQuantity(1); // set quantity to 1 if value cleared
+     }
+  },[quantity])
+
+  // form submit
+  const addItemHandler = (e) => {
+    e.preventDefault();
+    if (!formHasError) {
+      const data = {
+        product_id: product.id,
+        color: selectedColor,
+        size: selectedSize,
+        brand: brand || null,
+        quantity,
+      };
+      
+      dispatch(addToCart({ data, token }));
+    }
+  };
+
   return (
     <section className={`section`}>
       <div className="section__wrapper">
         {loading && <p>please wait...</p>}
         {product && !loading && (
           <div>
-            <div className="product__img_container" style={{display: 'flex', alignItems: 'center'}}>
-              <div className="gallery__thumbs">
-                {product.gallery.map((img, index) => {
-                  return (
-                    <div
-                      className="thumb"
-                      key={index}
-                      onClick={(e) => setDefaultImage(img.image)}
-                    >
-                      <img
-                        src={`http://localhost:8000${img.thumb}`}
-                        alt={product.product_name}
-                        width="50"
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="default__img">
-                <img
-                  src={`http://localhost:8000${defaultImage}`}
-                  alt={product.product_name}
-                ></img>
-              </div>
-            </div>
-            <div>
-              <h5>{product.product_name}</h5>
-              <div className="review">
-                <ReviewStar rating={product.rating} /> (
-                <span>{product.reviews.length} customer reviews</span>)
-              </div>
-              {brand && <p>{brand}</p>}
-              <p>$ {product.price}</p>
-            </div>
-            <div>
-              <form>
-                {errorMsg && <h5>{errorMsg}</h5>}
-                {colors.length > 0 && (
-                  <div>
-                    <h5>colors</h5>
-                    {colors.map((color) => {
-                      return (
-                        <div
-                          style={{
-                            display: "inline-block",
-                            margin: "1rem",
-                            border: "ipx solid black",
-                          }}
-                          key={product.id + color}
-                        >
-                          <label htmlFor={color}>{color}</label>
-                          <input
-                            type="radio"
-                            name="color"
-                            id={color}
-                            value={color}
-                            required={colors && true}
-                            checked={color === selectedColor}
-                            onChange={handleColorChange}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {sizes.length > 0 && (
-                  <div>
-                    <h5>sizes</h5>
-                    {sizes.map((size) => {
-                      return (
-                        <div
-                          style={{
-                            display: "inline-block",
-                            margin: "1rem",
-                          }}
-                          key={product.id + size}
-                        >
-                          <label htmlFor={size}>{size}</label>
-                          <input
-                            type="radio"
-                            name="size"
-                            id={size}
-                            value={size}
-                            required={sizes && true}
-                            checked={size === selectedSize}
-                            onChange={handleSizeChange}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                <div>
-                  <button type="submit" onClick={addItemHandler}>
-                    add to cart
-                  </button>
+            <div className={styles.product__detail}>
+              <div className={styles.image__container}>
+                <div className="gallery__thumbs">
+                  {product.gallery.map((img, index) => {
+                    return (
+                      <div
+                        className="thumb"
+                        key={index}
+                        onClick={(e) => setDefaultImage(img.image)}
+                      >
+                        <img
+                          src={`http://localhost:8000${img.thumb}`}
+                          alt={product.product_name}
+                          width="50"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
-              </form>
+                <div className={styles.default__img}>
+                  <img
+                    src={`http://localhost:8000${defaultImage}`}
+                    alt={product.product_name}
+                  ></img>
+                </div>
+              </div>
+              <div>
+                <div className={styles.product__info}>
+                  <h5>{product.product_name}</h5>
+                  {brand && <p>{brand}</p>}
+                  <p className={styles.product__price}>
+                    $<span>{product.price}</span>
+                  </p>
+                  <div className="review">
+                    <ReviewStar rating={product.rating} /> (
+                    <span>{product.reviews.length} customer reviews</span>)
+                  </div>
+                </div>
+
+                {/* ADD TO CART FORM */}
+                <div className={styles.product__form}>
+                  <form>
+                    {formHasError && <h5>{errorMsg}</h5>}
+                    {colors.length > 0 && (
+                      <div>
+                        <h5 className={styles.variation__title}>colors</h5>
+                        {colors.map((color) => {
+                          return (
+                            <div
+                              className={styles.form__group}
+                              key={product.id + color}
+                            >
+                              <label
+                                htmlFor={color}
+                                className={`${
+                                  selectedColor === color ? styles.selected : ""
+                                }`}
+                              >
+                                {color}
+                              </label>
+                              <input
+                                type="radio"
+                                name="color"
+                                id={color}
+                                value={color}
+                                required={colors && true}
+                                checked={color === selectedColor}
+                                onChange={handleColorChange}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {sizes.length > 0 && (
+                      <div>
+                        <h5 className={styles.variation__title}>sizes</h5>
+                        {sizes.map((size) => {
+                          return (
+                            <div
+                              className={styles.form__group}
+                              key={product.id + size}
+                            >
+                              <label
+                                htmlFor={size}
+                                className={`${
+                                  selectedSize === size ? styles.selected : ""
+                                }`}
+                              >
+                                {size}
+                              </label>
+                              <input
+                                type="radio"
+                                name="size"
+                                id={size}
+                                value={size}
+                                required={sizes && true}
+                                checked={size === selectedSize}
+                                onChange={handleSizeChange}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* quantity */}
+                    <div className={styles.quantity}>
+                      <h4>Quantity</h4>
+                      <div>
+                        <span
+                          className={styles.minus}
+                          onClick={() => handleQuantityChange(quantity - 1)}
+                        >
+                          {" "}
+                          <FiMinus/>{" "}
+                        </span>
+                        <input
+                          type="text"
+                          value={Number.isNaN(quantity) ? 1 : quantity} // if user clear quatity return 1 instead
+                          onChange={(e) => handleQuantityChange(e.target.value)}
+                        />
+                        <span
+                          className={styles.plus}
+                          onClick={() => handleQuantityChange(quantity + 1)}
+                        >
+                          {" "}
+                          <FiPlus/>{" "}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        className="light__btn_big"
+                        type="submit"
+                        onClick={addItemHandler}
+                      >
+                        add to cart
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
 
-            {/* review */}
+            {/* REVIEW */}
             <div>
               {/* review form  */}
               {!alreadyReviewed && isPurchased && (

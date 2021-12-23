@@ -150,8 +150,10 @@ const ProductFilter = () => {
           value={price}
         />
       </div>
-      <div className={styles.clear__btn}>
-        <button onClick={clearFilter}>clear filter</button>
+      <div>
+        <button className={`light__btn_big`} onClick={clearFilter}>
+          clear filter
+        </button>
       </div>
     </aside>
   );

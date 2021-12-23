@@ -73,7 +73,24 @@ code {
   padding: .5rem 1rem;
   font-size: 1.3rem;
 }
+.light__btn_big{
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: 10em;
+  font-size: 1.5em;
+  padding: .5em 1em;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: background .3s transform .5s;
+}
 
+.light__btn_big:hover{
+  color: #fff;
+  background-color: var(--primary-color);
+}
+.light__btn_big:active{
+  transform: scale(.97);
+}
 /* END OF UI */
 
 .nav__links a.active::after{
