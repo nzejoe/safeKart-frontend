@@ -4,6 +4,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import RatingStar from "./RatingStar";
+// style
+import styles from './Review.module.css'
 
 const ReviewEditForm = ({ userReview, handlePageRefresh, handleEdit }) => {
   const { token } = useSelector((state) => state.users);
@@ -51,8 +53,8 @@ const ReviewEditForm = ({ userReview, handlePageRefresh, handleEdit }) => {
   };
 
   return (
-    <div className="review__form">
-      <h4>Edit your review</h4>
+    <div className={styles.review__form}>
+      <h3>Edit your review</h3>
       <form onSubmit={handleSubmit}>
         {formHasError && <p>Please rate this product.</p>}
         <RatingStar onChange={handleRateChange} rating={rating} />
@@ -71,7 +73,7 @@ const ReviewEditForm = ({ userReview, handlePageRefresh, handleEdit }) => {
           value={review}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
-        <div>
+        <div className={styles.btn__container}>
           <button type="submit">Save</button>
         </div>
       </form>

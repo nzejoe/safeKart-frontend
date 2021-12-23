@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 import UserReview from "./UserReview";
 import ReviewEditForm from "./ReviewEditForm";
 import axios from "axios";
+// ui
+import Loading from "../UI/Loading";
+// style
+import styles from './Review.module.css'
 
 const MyReview = ({ review, handleRefresh }) => {
   const { token } = useSelector((state) => state.users);
@@ -32,7 +36,6 @@ const MyReview = ({ review, handleRefresh }) => {
           setConfirmDelete(false);
           setRemove(false);
           handleRefresh();
-          console.log(response.data)
         }
       } catch (error) {
         console.log({ ...error });
@@ -46,11 +49,11 @@ const MyReview = ({ review, handleRefresh }) => {
   }, [confirmDelete, token, review, handleRefresh]);
 
   return (
-    <div>
+    <div className={styles.my__review}>
       {!edit && review ? (
         <div>
-            <h4>My review</h4>
-            <UserReview review={review} />
+          <h4>My review</h4>
+          <UserReview review={review} my_review={true} />
         </div>
       ) : (
         <ReviewEditForm
@@ -59,20 +62,37 @@ const MyReview = ({ review, handleRefresh }) => {
           handleEdit={handleEdit}
         />
       )}
-      {sending && <p>Please wait...</p>}
-      {!sending && !remove && !edit && (// if remove button not yet pressed
-        <React.Fragment>
-          <button onClick={handleEdit}>Edit review</button>
-          <button onClick={() => setRemove(true)}>Remove</button>
-        </React.Fragment>
-      )}
-      {remove && !sending && (
-        <div>
-          <h5>Are you sure you want to delete your review?</h5>
-          <button onClick={setConfirmDelete}>Yes</button>
-          <button onClick={() => setRemove(false)}>Cancel</button>
-        </div>
-      )}
+      {sending && <Loading />}
+      {!sending &&
+        !remove &&
+        !edit && ( // if remove button not yet pressed
+          <div className={styles.review__btn_container}>
+            <button className={styles.btn__safe} onClick={handleEdit}>
+              Edit review
+            </button>
+            <button
+              className={styles.btn__danger}
+              onClick={() => setRemove(true)}
+            >
+              Remove
+            </button>
+          </div>
+        )}
+      {remove &&
+        !sending && ( // if remove button has been pressed
+          <div className={styles.review__btn_container}>
+            <h5>Are you sure you want to delete your review?</h5>
+            <button className={styles.btn__danger} onClick={setConfirmDelete}>
+              Yes
+            </button>
+            <button
+              className={styles.btn__safe}
+              onClick={() => setRemove(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
     </div>
   );
 };

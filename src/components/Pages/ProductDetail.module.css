@@ -1,3 +1,7 @@
+.product__detail{
+   border-bottom: 1px solid var(--dark-trans-3);
+}
+
 .image__container {
   display: flex;
   justify-content: space-between;
@@ -11,10 +15,12 @@
 .default__img{
   width: 100%;
   height: 100%;
+  padding: 2rem 0;
 }
 
 .default__img img{
   width: 100%;
+  height: 100%;
 }
 
 .product__info h5 {
@@ -36,7 +42,8 @@
   margin-bottom: 2em;
 }
 
-.variation__title {
+.variation__title,
+.quantity h5 {
   font-size: 1.3em;
   margin-bottom: 1em;
   color: var(--dark-color-2);
@@ -122,6 +129,20 @@ label.selected,
   border-top-right-radius: 10rem;
   border-bottom-right-radius: 10rem;
 }
+
+/* REVIEWS */
+.reviews{
+  width: 100%;
+  max-width: 50rem;
+  padding: 2rem 0;
+}
+
+.users__reviews h2{
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+/* END OF REVIEWS */
 
 @media screen and (min-width: 800px) {
   .product__detail {

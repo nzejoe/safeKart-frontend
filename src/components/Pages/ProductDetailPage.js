@@ -167,7 +167,7 @@ const ProductDetailPage = () => {
   return (
     <section className={`section`}>
       <div className="section__wrapper">
-        {loading && <Loading/>}
+        {loading && <Loading />}
         {product && !loading && (
           <div>
             <div className={styles.product__detail}>
@@ -279,14 +279,14 @@ const ProductDetailPage = () => {
 
                     {/* quantity */}
                     <div className={styles.quantity}>
-                      <h4>Quantity</h4>
+                      <h5>Quantity</h5>
                       <div>
                         <span
                           className={styles.minus}
                           onClick={() => handleQuantityChange(quantity - 1)}
                         >
                           {" "}
-                          <FiMinus/>{" "}
+                          <FiMinus />{" "}
                         </span>
                         <input
                           type="text"
@@ -298,7 +298,7 @@ const ProductDetailPage = () => {
                           onClick={() => handleQuantityChange(quantity + 1)}
                         >
                           {" "}
-                          <FiPlus/>{" "}
+                          <FiPlus />{" "}
                         </span>
                       </div>
                     </div>
@@ -317,8 +317,8 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            {/* REVIEW */}
-            <div>
+            {/* REVIEW CONTAINER */}
+            <div className={styles.reviews}>
               {/* review form  */}
               {!alreadyReviewed && isPurchased && (
                 <ReviewForm
@@ -327,26 +327,32 @@ const ProductDetailPage = () => {
                 />
               )}
               {/* end of review form */}
+              {/* REVIEWS */}
+              <div className={styles.users__reviews}>
+                <h2>Reviews</h2>
+                {/* user review */}
+                {myReview && alreadyReviewed && (
+                  <MyReview
+                    review={myReview}
+                    handleRefresh={handlePageRefresh}
+                  />
+                )}
 
-              {/* user review */}
-              {myReview && alreadyReviewed && (
-                <MyReview review={myReview} handleRefresh={handlePageRefresh} />
-              )}
-
-              {/* review list */}
-              {reviews && reviews.length !== 0 ? (
-                <React.Fragment>
-                  <h3>Reviews</h3>
-                  {reviews.map((review) => {
-                    return <UserReview key={review.id} review={review} />;
-                  })}
-                </React.Fragment>
-              ) : (
-                <h4>No review for this product yet.</h4>
-              )}
-              {/* end of review list */}
+                {/* review list */}
+                {reviews && reviews.length !== 0 ? (
+                  <React.Fragment>
+                    {reviews.map((review) => {
+                      return <UserReview key={review.id} review={review} />;
+                    })}
+                  </React.Fragment>
+                ) : (
+                  <h4>No review for this product yet.</h4>
+                )}
+                {/* end of review list */}
+              </div>
+              {/* END OF REVIEWS */}
             </div>
-            {/* end of review */}
+            {/* END OF REVIEW CONTAINER */}
           </div>
         )}
         {

@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 
 import RatingStar from "./RatingStar";
+// style
+import styles from './Review.module.css'
 
 const ReviewForm = ({ productId, handlePageRefresh }) => {
   const { token } = useSelector((state) => state.users);
@@ -52,21 +54,19 @@ const ReviewForm = ({ productId, handlePageRefresh }) => {
   };
 
   return (
-    <div className="review__form">
+    <div className={styles.review__form}>
       <h3>How do you rate this product?</h3>
       <form onSubmit={handleSubmit}>
         {formhasError && <p>Please rate this product.</p>}
         <RatingStar onChange={handleRateChange} />
-        <input type="text" placeholder="Enter subject" ref={subjectRef} />
+        <input type="text" placeholder="Enter subject" ref={subjectRef}/>
         <textarea
           name=""
           id=""
-          cols="30"
-          rows="10"
           placeholder="Write a short note about this product."
           ref={reviewRef}
         ></textarea>
-        <div>
+        <div className={styles.btn__container}>
           <button type="submit">Submit</button>
         </div>
       </form>
