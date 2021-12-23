@@ -16,6 +16,7 @@ import { NotFound } from ".";
 import ReviewStar from "../UI/ReviewStar";
 import ReviewForm from "../Products/ReviewForm";
 import MyReview from "../Products/MyReview";
+import Loading from "../UI/Loading";
 
 const ProductDetailPage = () => {
   const { token, authUser } = useSelector((state) => state.users);
@@ -44,6 +45,9 @@ const ProductDetailPage = () => {
 
   const { slug } = useParams();
   const dispatch = useDispatch();
+
+  // page title
+   document.title = `${product && product.product_name} | SafeKart`
 
   useEffect(() => {
     const getProduct = async () => {
@@ -163,7 +167,7 @@ const ProductDetailPage = () => {
   return (
     <section className={`section`}>
       <div className="section__wrapper">
-        {loading && <p>please wait...</p>}
+        {loading && <Loading/>}
         {product && !loading && (
           <div>
             <div className={styles.product__detail}>

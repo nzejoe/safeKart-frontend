@@ -85,7 +85,11 @@ label.selected,
   border-top: 1px solid var(--dark-trans-2);
   border-bottom: 1px solid var(--dark-trans-2);
   position: relative;
-  top: -3.5px;
+  top: -3px;
+}
+
+.quantity input:focus{
+  box-shadow: inset var(--light-shadow-2);
 }
 
 .quantity span{

@@ -1,0 +1,31 @@
+.container{
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: calc(100vh - 7.3rem); /* subtract the height of navbar*/ 
+    z-index: 9;
+}
+
+.container > div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--primary-color);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    animation: loading .7s infinite;
+}
+
+@keyframes loading {
+    from{
+        opacity: 1;
+        transform: scale(.3);
+    }
+    to{
+        opacity: 0;
+        transform: scale(1);
+    }
+}
