@@ -1,6 +1,7 @@
 .navbar {
   box-shadow: var(--light-shadow);
   padding: 1rem;
+  transition: all .5s;
 }
 
 .navbar > div:not(.search__modal) {
@@ -8,6 +9,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.fixed__nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  background-color: #fff;
+  width: 100vw;
+  box-shadow: var(--light-shadow-1);
 }
 
 /* SEARCH */

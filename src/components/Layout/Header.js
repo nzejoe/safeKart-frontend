@@ -15,6 +15,7 @@ import { getTotalCart } from "../../utils";
 import styles from "./Header.module.css";
 //ui
 import ModalSearch from "../UI/ModalSearch";
+import { useRef } from "react";
 
 const Header = () => {
   const { authUser } = useSelector((state) => state.users);
@@ -31,6 +32,14 @@ const Header = () => {
   // get user token
   const token = authUser && authUser.token;
   const totalCartItems = getTotalCart(cartList);
+
+  // nanbar top fixing
+  const [fixedNav, setFixedNav] = useState(false);
+  const navbarRef = useRef()
+
+  console.log(navbarRef.current && navbarRef.current.clientHeight);
+
+  // console.log(window.screenTop)
 
   const dispatch = useDispatch();
 
@@ -73,8 +82,21 @@ const Header = () => {
     }, 300);
   };
 
+  // WINDOW SCROLL
+  useEffect(()=>{
+    window.addEventListener('scroll', (e)=>{
+      const navHeight = navbarRef.current && navbarRef.current.clientHeight
+      if (window.pageYOffset > navHeight) {
+        setFixedNav(true)
+      } else {
+        setFixedNav(false)
+      };
+    })
+    
+  },[])
+
   return (
-    <section className={`${styles.navbar}`}>
+    <section className={`${styles.navbar} ${fixedNav && styles.fixed__nav}`}>
       {/* SEARCH */}
       <div
         className={`${styles.search__modal} ${
@@ -119,7 +141,7 @@ const Header = () => {
         </div>
         <div className="search__results"></div>
       </div>
-      <div className={`section__wrapper`}>
+      <div className={`section__wrapper`} ref={navbarRef}>
         <div className={styles.logo}>
           <h5>SafeKart</h5>
         </div>
