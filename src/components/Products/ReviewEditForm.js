@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
+// 3rd party
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -72,6 +73,7 @@ const ReviewEditForm = ({ userReview, handlePageRefresh, handleEdit }) => {
           placeholder="Write a short note about this product."
           value={review}
           onChange={(e) => setReview(e.target.value)}
+          ref={ref}
         ></textarea>
         <div className={styles.btn__container}>
           <button type="submit">Save</button>

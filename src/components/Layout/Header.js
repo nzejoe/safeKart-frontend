@@ -37,10 +37,6 @@ const Header = () => {
   const [fixedNav, setFixedNav] = useState(false);
   const navbarRef = useRef()
 
-  console.log(navbarRef.current && navbarRef.current.clientHeight);
-
-  // console.log(window.screenTop)
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -82,10 +78,12 @@ const Header = () => {
     }, 300);
   };
 
-  // WINDOW SCROLL
+  // WINDOW SCROLL HANDLER
   useEffect(()=>{
     window.addEventListener('scroll', (e)=>{
+      // set navbar height
       const navHeight = navbarRef.current && navbarRef.current.clientHeight
+      // check if window scroll top is greater than the height of navbar
       if (window.pageYOffset > navHeight) {
         setFixedNav(true)
       } else {

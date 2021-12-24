@@ -29,6 +29,7 @@
 
 .review__form form textarea {
   width: 100%;
+  min-width: 32rem;
   max-width: 50rem;
   height: 20rem;
   outline: none;

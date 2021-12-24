@@ -34,6 +34,7 @@ const { actions, reducer } = createSlice({
       price: 0,
     },
     currentRequestId: null,
+    loading: false,
   },
   reducers: {
     getFilterProducts: (state, action) => {
@@ -109,6 +110,7 @@ const { actions, reducer } = createSlice({
     [getProducts.pending]: (state, action) => {
       const { requestId } = action.meta;
       state.currentRequestId = requestId;
+      state.loading = true;
     },
 
     [getProducts.fulfilled]: (state, action) => {
@@ -117,6 +119,7 @@ const { actions, reducer } = createSlice({
         state.allProducts = action.payload;
         state.filteredProducts = state.allProducts;
         state.currentRequestId = null;
+        state.loading = false;
       }
     },
 
@@ -125,6 +128,7 @@ const { actions, reducer } = createSlice({
       if (state.currentRequestId === requestId) {
         console.log(action.payload);
         state.currentRequestId = null;
+        state.loading = false;
       }
     },
   },
