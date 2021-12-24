@@ -73,7 +73,6 @@ const ReviewEditForm = ({ userReview, handlePageRefresh, handleEdit }) => {
           placeholder="Write a short note about this product."
           value={review}
           onChange={(e) => setReview(e.target.value)}
-          ref={ref}
         ></textarea>
         <div className={styles.btn__container}>
           <button type="submit">Save</button>

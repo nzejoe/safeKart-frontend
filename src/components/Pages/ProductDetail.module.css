@@ -32,6 +32,7 @@
   font-size: 2em;
   color: var(--primary-color);
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .product__form{
@@ -130,8 +131,44 @@ label.selected,
   border-bottom-right-radius: 10rem;
 }
 
+/* TABS */
+.tabs{
+  display: flex;
+  max-width: 20rem;
+  justify-content: space-between;
+}
+
+.tab__control{
+  cursor: pointer;
+  flex: 1 0;
+  text-align: center;
+  text-transform: capitalize;
+  border-bottom: 3px solid transparent;
+  padding: 1rem .5rem;
+  transition: all .3s;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: var(--dark-color);
+}
+
+.active__control, .tab__control:hover{
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.tab{
+  display: none;
+}
+
+.active__tab{
+  display: block;
+}
+
+.description p{
+  font-size: 1.5rem;
+}
+
 /* REVIEWS */
-.reviews{
+.reviews, .description{
   width: 100%;
   max-width: 50rem;
   padding: 2rem 0;

@@ -17,6 +17,7 @@ import ReviewStar from "../UI/ReviewStar";
 import ReviewForm from "../Products/ReviewForm";
 import MyReview from "../Products/MyReview";
 import Loading from "../UI/Loading";
+import Product from "../Products/Product";
 
 const ProductDetailPage = () => {
   const { token, authUser } = useSelector((state) => state.users);
@@ -46,8 +47,12 @@ const ProductDetailPage = () => {
   const { slug } = useParams();
   const dispatch = useDispatch();
 
+  // TAB TOGGLER
+  const [toggle, setToggle] = useState(1);
+
   // page title
    document.title = `${product && product.product_name} | SafeKart`
+
 
   useEffect(() => {
     const getProduct = async () => {
@@ -163,6 +168,11 @@ const ProductDetailPage = () => {
       dispatch(addToCart({ data, token }));
     }
   };
+
+  // TAB TOGGLE HANDLER
+  const handleTabToggle = (index) => {
+    setToggle(index)
+  }
 
   return (
     <section className={`section`}>
@@ -317,8 +327,48 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
+            {/* PRODUCT TAB CONTROLS */}
+            <div className={`${styles.tabs}`}>
+              <div
+                className={` ${
+                  toggle === 1
+                    ? `${styles.tab__control} ${styles.active__control} `
+                    : styles.tab__control
+                }`}
+                onClick={() => handleTabToggle(1)}
+              >
+                <h2>description</h2>
+              </div>
+              <div
+                className={` ${
+                  toggle === 2
+                    ? `${styles.tab__control} ${styles.active__control} `
+                    : styles.tab__control
+                }`}
+                onClick={() => handleTabToggle(2)}
+              >
+                <h2>reviews</h2>
+              </div>
+            </div>
+            {/* TAB CONTENTs */}
+            {/* Description */}
+            <div
+              className={`${styles.description} ${
+                toggle === 1
+                  ? `${styles.tab} ${styles.active__tab}`
+                  : styles.tab
+              }`}
+            >
+              <p>{Product && product.description}</p>
+            </div>
             {/* REVIEW CONTAINER */}
-            <div className={styles.reviews}>
+            <div
+              className={`${styles.reviews} ${
+                toggle === 2
+                  ? `${styles.tab} ${styles.active__tab}`
+                  : styles.tab
+              }`}
+            >
               {/* review form  */}
               {!alreadyReviewed && isPurchased && (
                 <ReviewForm
@@ -328,8 +378,7 @@ const ProductDetailPage = () => {
               )}
               {/* end of review form */}
               {/* REVIEWS */}
-              <div className={styles.users__reviews}>
-                <h2>Reviews</h2>
+              <div className={`${styles.users__reviews}`}>
                 {/* user review */}
                 {myReview && alreadyReviewed && (
                   <MyReview
