@@ -20,7 +20,6 @@ const CartPage = () => {
   const dispatch = useDispatch();
 
   const totalAmount = getTotalAmount(cartList);
-  const tax = ((2 / 100) * totalAmount).toFixed(2);
 
   useEffect(() => {
     const token = authUser && authUser.token;

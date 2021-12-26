@@ -1,4 +1,6 @@
 import React from "react";
+//style
+import styles from './Input.module.css'
 
 const Input = ({
   type,
@@ -9,20 +11,23 @@ const Input = ({
   onChange,
   onBlur,
   hasError,
-  errorMsg
+  errorMsg,
+  className,
 }) => {
   return (
-    <div className="form__group">
-      <label htmlFor={name}>{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        id={name}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-      {hasError && <p className="error">{errorMsg}</p>}
+    <div className={`${className}`}>
+      <div className={styles.form__group}>
+        <input
+          type={type}
+          placeholder={placeholder}
+          id={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+        <label htmlFor={name}>{label}</label>
+      </div>
+      {hasError && <p className={styles.error}>{errorMsg}</p>}
     </div>
   );
 };

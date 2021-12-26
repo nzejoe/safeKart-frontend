@@ -1,0 +1,77 @@
+.billing__address {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.row > div {
+  flex: 1 0;
+}
+
+.row > div:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.form__group {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+.form__group select {
+  outline: none;
+  border: 1px solid var(--primary-color);
+  border-radius: 10rem;
+  padding: 1rem;
+  display: block;
+  text-transform: capitalize;
+}
+
+.form__group label {
+  display: block;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  top: 2.5rem;
+  left: 0;
+  visibility: hidden;
+  transition: top 0.3s;
+  text-transform: capitalize;
+  z-index: 2;
+}
+
+.form__group select:focus + label {
+  top: 0;
+  visibility: visible;
+}
+
+.form__group option {
+  text-transform: capitalize;
+}
+
+.btn__proceed{
+  text-align: left;
+  width: 100%;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+.btn__proceed button{
+  display: inline-block;
+  text-decoration: none;
+  padding: .5rem 1.5rem;
+  background-color: var(--primary-color);
+  color: #fff; 
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn__proceed button:hover{
+  background-color: var(--primary-color-dark);
+}

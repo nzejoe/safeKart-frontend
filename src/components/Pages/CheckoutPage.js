@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // store
-import { actions as orderActions } from '../../store/order-slice';
+import { actions as orderActions } from "../../store/order-slice";
 // custom hook
 import useInput from "../../hooks/input-hook";
 // ui
 import Input from "../UI/Input";
+// style
+import styles from "./CheckoutPage.module.css";
 
 const CheckoutPage = () => {
   document.title = "Checkout | SafeKart";
@@ -146,7 +148,7 @@ const CheckoutPage = () => {
       };
 
       dispatch(orderActions.saveOrder(data));
-      navigate('/place_order/');
+      navigate("/place_order/");
     } else {
       setFormHasError(true);
     }
@@ -172,136 +174,153 @@ const CheckoutPage = () => {
   return (
     <section className={`section `}>
       <div className="section__wrapper">
-        <div>
-          <h4>Billing Address</h4>
+        <div className={styles.billing__address}>
+          <h2>Billing Address</h2>
           <form onSubmit={handleSubmit}>
             {formHasError && (
               <div className="messages">
                 <p>please fill form properly!</p>
               </div>
             )}
-            <Input
-              type="text"
-              value={firstName}
-              name="first_name"
-              placeholder="First name"
-              label="First Name"
-              onChange={firstNameChange}
-              onBlur={firstNameBlur}
-              hasError={firstNameHasError}
-              errorMsg="This field is required"
-            />
-            <Input
-              type="text"
-              value={middleName}
-              name="middle_name"
-              placeholder="Middle name"
-              label="Middle Name"
-              onChange={middleNameChange}
-              onBlur={middleNameBlur}
-              hasError={middleNameHasError}
-            />
-            <Input
-              type="text"
-              name="last_name"
-              value={lastName}
-              placeholder="First name"
-              label="First Name"
-              onChange={lastNameChange}
-              onBlur={lastNameBlur}
-              hasError={lastNameHasError}
-              errorMsg="This field is required"
-            />
-            <div className="form__group">
-              <label htmlFor="gender">gender</label>
-              <select
-                name="gender"
-                onChange={(e) => setGender(e.target.value)}
-                id="gender"
-              >
-                <option value="male">male </option>
-                <option value="female">female</option>
-              </select>
+            <div className={`${styles.row} ${styles.col__2}`}>
+              <Input
+                type="text"
+                value={firstName}
+                name="first_name"
+                placeholder="First name"
+                label="First Name"
+                onChange={firstNameChange}
+                onBlur={firstNameBlur}
+                hasError={firstNameHasError}
+                errorMsg="This field is required"
+              />
+              <Input
+                type="text"
+                value={middleName}
+                name="middle_name"
+                placeholder="Middle name"
+                label="Middle Name"
+                onChange={middleNameChange}
+                onBlur={middleNameBlur}
+                hasError={middleNameHasError}
+              />
             </div>
-            <Input
-              type="email"
-              name="email"
-              value={email}
-              label="Email"
-              placeholder="Email address"
-              onChange={emailChange}
-              onBlur={emailBlur}
-              hasError={emailHasError}
-              errorMsg={email ? "not a valid email" : "This field is required"}
-            />
-            <Input
-              type="text"
-              name="phone"
-              value={phone}
-              placeholder="Phone number"
-              label="Phone"
-              onChange={phoneChange}
-              onBlur={phoneBlur}
-              hasError={phoneHasError}
-              errorMsg="This field is required"
-            />
-            <Input
-              type="text"
-              name="address_1"
-              value={address_1}
-              label="Address 1"
-              placeholder="Address 1"
-              onChange={address_1Change}
-              onBlur={address_1Blur}
-              hasError={address_1HasError}
-              errorMsg="This field is required"
-            />
-            <Input
-              type="text"
-              name="address_2"
-              value={address_2}
-              label="Address 2"
-              placeholder="Address 2"
-              onChange={address_2Change}
-              onBlur={address_2Blur}
-              hasError={address_2HasError}
-              errorMsg="This field is required"
-            />
-            <Input
-              type="text"
-              name="city"
-              value={city}
-              label="City"
-              placeholder="City"
-              onChange={cityChange}
-              onBlur={cityBlur}
-              hasError={cityHasError}
-              errorMsg="This field is required"
-            />
-            <Input
-              type="text"
-              name="state"
-              value={state}
-              label="State"
-              placeholder="State"
-              onChange={stateChange}
-              onBlur={stateBlur}
-              hasError={stateHasError}
-              errorMsg="This field is required"
-            />
-            <Input
-              type="text"
-              name="country"
-              value={country}
-              label="Country"
-              placeholder="Country"
-              onChange={countryChange}
-              onBlur={countryBlur}
-              hasError={countryHasError}
-              errorMsg="This field is required"
-            />
-            <div>
-              <button type="submit">proceed to payment</button>
+            <div className={`${styles.row} ${styles.col__2}`}>
+              <Input
+                type="text"
+                name="last_name"
+                value={lastName}
+                placeholder="Last name"
+                label="Last Name"
+                onChange={lastNameChange}
+                onBlur={lastNameBlur}
+                hasError={lastNameHasError}
+                errorMsg="This field is required"
+              />
+              <div className={styles.form__group}>
+                <select
+                  name="gender"
+                  onChange={(e) => setGender(e.target.value)}
+                  id="gender"
+                >
+                  <option value="male">male </option>
+                  <option value="female">female</option>
+                </select>
+                <label htmlFor="gender">gender</label>
+              </div>
+            </div>
+            <div className={`${styles.row} ${styles.col__2}`}>
+              <Input
+                type="email"
+                name="email"
+                value={email}
+                label="Email address"
+                placeholder="Email address"
+                onChange={emailChange}
+                onBlur={emailBlur}
+                hasError={emailHasError}
+                errorMsg={
+                  email ? "not a valid email" : "This field is required"
+                }
+              />
+              <Input
+                type="text"
+                name="phone"
+                value={phone}
+                placeholder="Phone number"
+                label="Phone number"
+                onChange={phoneChange}
+                onBlur={phoneBlur}
+                hasError={phoneHasError}
+                errorMsg="This field is required"
+              />
+            </div>
+            <div className={styles.row}>
+              <Input
+                type="text"
+                name="address_1"
+                value={address_1}
+                label="Address 1"
+                placeholder="Address 1"
+                onChange={address_1Change}
+                onBlur={address_1Blur}
+                hasError={address_1HasError}
+                errorMsg="This field is required"
+              />
+            </div>
+            <div className={styles.row}>
+              <Input
+                type="text"
+                name="address_2"
+                value={address_2}
+                label="Address 2"
+                placeholder="Address 2"
+                onChange={address_2Change}
+                onBlur={address_2Blur}
+                hasError={address_2HasError}
+                errorMsg="This field is required"
+              />
+            </div>
+            <div className={`${styles.row} ${styles.col_3}`}>
+              <Input
+                type="text"
+                name="city"
+                value={city}
+                label="City"
+                placeholder="City"
+                onChange={cityChange}
+                onBlur={cityBlur}
+                hasError={cityHasError}
+                errorMsg="This field is required"
+                className="col__3"
+              />
+              <Input
+                type="text"
+                name="state"
+                value={state}
+                label="State"
+                placeholder="State"
+                onChange={stateChange}
+                onBlur={stateBlur}
+                hasError={stateHasError}
+                errorMsg="This field is required"
+                className="col__3"
+              />
+              <Input
+                type="text"
+                name="country"
+                value={country}
+                label="Country"
+                placeholder="Country"
+                onChange={countryChange}
+                onBlur={countryBlur}
+                hasError={countryHasError}
+                errorMsg="This field is required"
+                className="col__3"
+              />
+            </div>
+            <div className={styles.btn__proceed}>
+              <button type="submit">Proceed to payment</button>
             </div>
           </form>
         </div>

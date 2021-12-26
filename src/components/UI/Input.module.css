@@ -1,0 +1,48 @@
+.form__group{
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.form__group input{
+  outline: none;
+  border: 1px solid var(--primary-color);
+  border-radius: 10rem;
+  padding: 1rem;
+  display: block;
+  width: 100%;
+}
+
+.form__group label{
+  display: block;
+  font-size: 1.4rem;
+  padding: .5rem 1rem;
+  position: relative;
+  top: 2.5rem;
+  left: 0;
+  visibility: hidden;
+  transition: top .3s;
+  text-transform: capitalize;
+}
+
+.form__group input::placeholder{
+  text-transform: capitalize;
+}
+
+.form__group input:focus{
+  box-shadow: inset var(--light-shadow-2);
+}
+
+.form__group input:focus + label{
+  top: 0;
+  visibility: visible;
+}
+
+.form__group input:focus::placeholder{
+  visibility: hidden;
+}
+
+.error{
+  margin-top: .5rem;
+  color: #ff0000;
+}
