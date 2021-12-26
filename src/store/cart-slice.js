@@ -64,6 +64,7 @@ const { actions, reducer } = createSlice({
   initialState: {
     cartList: null,
     refresh: 0,
+    loading: false,
     currentRequestId: null,
   },
   reducers: {
@@ -77,12 +78,14 @@ const { actions, reducer } = createSlice({
     [getCartList.pending]: (state, action) => {
       const { requestId } = action.meta;
       state.currentRequestId = requestId;
+      state.loading = true;
     },
     [getCartList.fulfilled]: (state, action) => {
       const { requestId } = action.meta;
       if (state.currentRequestId === requestId) {
         state.cartList = action.payload;
         state.currentRequestId = null;
+        state.loading = false;
       }
     },
     [getCartList.rejected]: (state, action) => {
@@ -90,18 +93,21 @@ const { actions, reducer } = createSlice({
       if (state.currentRequestId === requestId) {
         console.log(action.payload);
         state.currentRequestId = null;
+        state.loading = false;
       }
     },
     // add to cart
     [addToCart.pending]: (state, action) => {
       const { requestId } = action.meta;
       state.currentRequestId = requestId;
+      state.loading = true;
     },
     [addToCart.fulfilled]: (state, action) => {
       const { requestId } = action.meta;
       if (state.currentRequestId === requestId) {
         state.refresh ++
         state.currentRequestId = null;
+        state.loading = false;
       }
     },
     [addToCart.rejected]: (state, action) => {
@@ -109,6 +115,7 @@ const { actions, reducer } = createSlice({
       if (state.currentRequestId === requestId) {
         console.log(action.payload);
         state.currentRequestId = null;
+        state.loading = false;
       }
     },
   },
