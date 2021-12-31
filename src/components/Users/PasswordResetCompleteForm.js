@@ -90,53 +90,53 @@ const PasswordResetCompleteForm = () => {
     }
   };
   return (
-    <div>
-        {
-            linkValid && !success && 
-        <form onSubmit={handleSubmit}>
+    <div className="user__form">
+      {linkValid && !success && (
+        <React.Fragment>
+          <h2>Set new password</h2>
+          <form onSubmit={handleSubmit}>
             <Input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter new password"
-            onChange={passwordChange}
-            onBlur={passwordBlur}
-            hasError={passwordHasError}
-            errorMsg={
+              type="password"
+              name="password"
+              value={password}
+              label="New password"
+              placeholder="New password"
+              onChange={passwordChange}
+              onBlur={passwordBlur}
+              hasError={passwordHasError}
+              errorMsg={
                 password
-                ? "Password should not be less than 5 characters."
-                : "Field cannot be empty!"
-            }
+                  ? "Password should not be less than 5 characters."
+                  : "Field cannot be empty!"
+              }
             />
             <Input
-            type="password"
-            name="password2"
-            value={password2}
-            placeholder="Enter new password"
-            onChange={password2Change}
-            onBlur={password2Blur}
-            hasError={password2HasError}
-            errorMsg={
+              type="password"
+              name="password2"
+              value={password2}
+              label="confirm password"
+              placeholder="confirm password"
+              onChange={password2Change}
+              onBlur={password2Blur}
+              hasError={password2HasError}
+              errorMsg={
                 password2 ? "Password did not match!" : "Field cannot be empty!"
-            }
+              }
             />
             <div className="form__actions">
-            <button type="submit">Set password</button>
+              <button type="submit">Set password</button>
             </div>
-        </form>
-        }
-        {
-            success && linkValid &&
-            <p>
-                Your new password was set successfully. <br/>
-                You will be redirect to login page. <br/>
-                <span>Please wait...</span>
-            </p>
-        }
-        {
-            !success && !linkValid && 
-            <h3>invalid link</h3>
-        }
+          </form>
+        </React.Fragment>
+      )}
+      {success && linkValid && (
+        <p>
+          Your new password was set successfully. <br />
+          You will be redirect to login page. <br />
+          <span>Please wait...</span>
+        </p>
+      )}
+      {!success && !linkValid && <h3>invalid link</h3>}
     </div>
   );
 };

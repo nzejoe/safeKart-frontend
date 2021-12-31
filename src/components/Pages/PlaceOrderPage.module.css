@@ -1,0 +1,103 @@
+.place__order h2{
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.address {
+  margin: 1rem 0;
+}
+
+.address h4, .order__product > h4{
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+.address p{
+  font-size: 1.3rem;
+}
+
+.order__product h4{
+  margin-bottom: 1rem;
+}
+
+.order__product p{
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.order__product .value{
+  font-weight: 300;
+}
+
+.cost .header{
+  background-color: #000;
+  color: #fff;
+}
+
+.cost h4{
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.cost .body{
+  height: 20rem;
+  border: 1px solid var(--dark-trans-3);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.cost .body p{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.cost .body .value{
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-left: 1rem;
+}
+
+.btn__payment{
+  text-align: right;
+  width: 100%;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+.btn__payment button{
+  display: inline-block;
+  text-decoration: none;
+  padding: .5rem 1.5rem;
+  background-color: var(--primary-color);
+  color: #fff; 
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.btn__payment button:hover{
+  background-color: var(--primary-color-dark);
+}
+
+@media screen and (min-width: 800px) {
+  .order{
+    display: flex;
+  }
+
+  .order__product{
+    flex: 2 0;
+    margin-right: 2rem;
+  }
+
+  .cost__container{
+    flex: 1 0;
+    margin-top: 2.5rem;
+  }
+}

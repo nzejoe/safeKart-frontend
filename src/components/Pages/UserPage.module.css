@@ -1,0 +1,17 @@
+.user__page{
+  min-height: calc((100vh - 5rem));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.invalid__link{
+  color: #ff0000;
+  font-size: 1.3rem;
+  background-color: rgba(255, 0,0, .1);
+  text-align: center;
+  padding: 1rem;
+  width: 20rem;
+  margin: auto;
+}

@@ -2,9 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+// style
+import styles from './UserPage.module.css'
 
 
 const PasswordResetConfirm = () => {
+  document.title = "Password reset confirm | SafeKart"
     const [ linkValid, setLinkValid ] = useState(true);
 
     const { uidb64, token } = useParams()
@@ -35,9 +38,9 @@ const PasswordResetConfirm = () => {
     },[sendRequest]);
 
     return (
-      <section className={`section `}>
+      <section className={`section ${styles.user__page}`}>
         <div className="section__wrapper">
-            {linkValid?  <h3>please wait...</h3> : <h3>Invalid link</h3> }
+            {linkValid?  <h3>please wait...</h3> : <h3 className={styles.invalid__link}>Invalid link</h3> }
         </div>
       </section>
     );

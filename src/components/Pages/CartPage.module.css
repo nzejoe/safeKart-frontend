@@ -1,3 +1,7 @@
+.cart__page{
+  min-height: 100vh;
+}
+
 .cart__page > h2 {
   text-align: center;
   margin-bottom: 2rem;

@@ -78,21 +78,25 @@ const PasswordChangeForm = () => {
   
 
   return (
-    <div>
+    <div className="user__form">
+      <h2>Password change</h2>
       {
         // while still editing
         !success && (
           <form onSubmit={handleSubmit}>
             <div className="messages">
-              {formHasError && <p>Please fill form properly.</p>}
+              {formHasError && (
+                <p className="form__error">Please fill form properly.</p>
+              )}
               {error && error.current_password && (
-                <p>{error.current_password}</p>
+                <p className="form__error">{error.current_password}</p>
               )}
             </div>
             <Input
               type="password"
               name="current_password"
-              placeholder="Enter current password"
+              label="Current password"
+              placeholder="Current password"
               value={currentPassword}
               onChange={currentPasswordChange}
               onBlur={currentPasswordBlur}
@@ -102,7 +106,8 @@ const PasswordChangeForm = () => {
             <Input
               type="password"
               name="new_password"
-              placeholder="Enter new password"
+              label="new password"
+              placeholder="new password"
               value={newPassword}
               onChange={newPasswordChange}
               onBlur={newPasswordBlur}
@@ -116,6 +121,7 @@ const PasswordChangeForm = () => {
             <Input
               type="password"
               name="new_password2"
+              label="Confirm password"
               placeholder="Confirm password"
               value={newPassword2}
               onChange={newPassword2Change}
@@ -130,7 +136,7 @@ const PasswordChangeForm = () => {
         )
       }
       {success && (
-        <p>
+        <p className="form__success">
           Your new password has been saved successfully. <br />
           We are going to log you out, so you can test your new password. <br />
           <span>Please wait...</span>

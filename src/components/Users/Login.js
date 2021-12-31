@@ -70,15 +70,15 @@ const Login = () => {
 
 
   return (
-    <div>
+    <div className="user__form">
+      <h2>User login</h2>
       <form onSubmit={handleSubmit}>
         <div className="message">
-          <p>
-            {
-              newError &&
-                error.non_field_errors[0] /* error msg from database */
-            }
-          </p>
+          {newError && (
+            <p className="form__error">
+             { error.non_field_errors[0]} {/* error msg from database */}
+            </p>
+          )}
         </div>
         <Input
           type="email"
@@ -105,10 +105,11 @@ const Login = () => {
         <div className="form__actions">
           <button type="submit">Log in</button>
           <p>
-            Need an account? <Link to="/accounts/login/">register</Link>
+            Need an account? <Link to="/accounts/register/">Register</Link>
           </p>
           <p>
-            Forgot password? <Link to="/accounts/password_reset/">reset password</Link>
+            Forgot password?{" "}
+            <Link to="/accounts/password_reset/">Reset password</Link>
           </p>
         </div>
       </form>

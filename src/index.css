@@ -6,6 +6,7 @@
   --primary-color-light: #6c91c2b9;
   --primary-color-light-2: #6c91c242;
   --primary-color-light-3: #6c91c21e;
+  --link-color: #5555e7;
   --dark-color: rgba(0, 0, 0, 0.822);
   --dark-color-2: rgba(0, 0, 0, 0.705);
   --dark-color-3: rgba(0, 0, 0, 0.726);
@@ -126,3 +127,67 @@ table td {
   display: block;
 }
 
+/* FORM */
+.user__form{
+  width: 100%;
+  max-width: 30rem;
+  margin: auto;
+  box-shadow: var(--light-shadow);
+  padding: 3rem;
+  text-align: left;
+}
+
+.user__form h2{
+  text-align: center;
+}
+
+.form__error{
+  margin-top: 2rem;
+  color: #ff0000;
+  font-size: 1.3rem;
+  background-color: rgba(255, 0,0, .1);
+  text-align: center;
+  padding: 1rem;
+}
+
+.form__success{
+  margin-top: 2rem;
+  color: #269c30;
+  font-size: 1.3rem;
+  background-color: #269c303f;
+  text-align: center;
+  padding: 1rem;
+}
+
+.form__actions{
+  text-align: left;
+  width: 100%;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+.form__actions button{
+  display: inline-block;
+  text-decoration: none;
+  padding: .5rem 1.5rem;
+  background-color: var(--primary-color);
+  color: #fff; 
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.form__actions button:hover{
+  background-color: var(--primary-color-dark);
+}
+
+.form__actions a{
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+.form__actions a:hover{
+  text-decoration: underline;
+}
+/* END OF FORM */

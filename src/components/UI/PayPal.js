@@ -99,8 +99,8 @@ const PayPal = ({ totalAmount, tax, grandTotal}) => {
   }, [dispatch, order, totalAmount, grandTotal, tax, error, paymentApproved, navigate, token]);
 
   return (
-    <div>
-        {
+    <div style={{position: 'relative', zIndex: '0'}}>
+        {   
             !error && !paymentApproved &&
             <div ref={paypalRef}></div>
         }

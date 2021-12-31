@@ -12,27 +12,26 @@ import { userRegister } from "../../store/user-slice";
 import Input from "../UI/Input";
 
 const Register = () => {
-    const [formHasError, setFormHasError] = useState(false);
-    const { error } = useSelector(state => state.users);
-    const [success, setSuccess] = useState(false);
+  const [formHasError, setFormHasError] = useState(false);
+  const { error } = useSelector((state) => state.users);
+  const [success, setSuccess] = useState(false);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    // destructure error message
-    let errorMsg = ''
-    if(error){
-      const { username, email } = error;
-      if (username && !email){
-        errorMsg = username[0];
-      }else if(email && !username){
-        errorMsg = email && email[0];
-      }else if(username && email){
-        errorMsg = username && email && 'Username and Email already exists!'
-      }
+  // destructure error message
+  let errorMsg = "";
+  if (error) {
+    const { username, email } = error;
+    if (username && !email) {
+      errorMsg = username[0];
+    } else if (email && !username) {
+      errorMsg = email && email[0];
+    } else if (username && email) {
+      errorMsg = username && email && "Username and Email already exists!";
     }
+  }
 
-  
   // username
   const validateUsername = (username) => {
     return username.length > 2;
@@ -54,90 +53,102 @@ const Register = () => {
     return re.test(String(email).toLowerCase());
   }
 
-   const {
-     value: email,
-     isValid: emailIsValid,
-     onChange: emailChange,
-     onInputBlur: emailBlur,
-     hasError: emailHasError,
-   } = useInput(validateEmail);
+  const {
+    value: email,
+    isValid: emailIsValid,
+    onChange: emailChange,
+    onInputBlur: emailBlur,
+    hasError: emailHasError,
+  } = useInput(validateEmail);
 
-   //password
-   const validatePassword = (password) => {
-       return password.length > 5
-   }
-   const {
-     value: password,
-     isValid: passwordIsValid,
-     onChange: passwordChange,
-     onInputBlur: passwordBlur,
-     hasError: passwordHasError,
-   } = useInput(validatePassword);
+  //password
+  const validatePassword = (password) => {
+    return password.length > 5;
+  };
+  const {
+    value: password,
+    isValid: passwordIsValid,
+    onChange: passwordChange,
+    onInputBlur: passwordBlur,
+    hasError: passwordHasError,
+  } = useInput(validatePassword);
 
-   //password2
-   const validatePassword2 = (password2) => {
-       return password2 === password
-   }
-   const {
-     value: password2,
-     isValid: password2IsValid,
-     onChange: password2Change,
-     onInputBlur: password2Blur,
-     hasError: password2HasError,
-   } = useInput(validatePassword2);
+  //password2
+  const validatePassword2 = (password2) => {
+    return password2 === password;
+  };
+  const {
+    value: password2,
+    isValid: password2IsValid,
+    onChange: password2Change,
+    onInputBlur: password2Blur,
+    hasError: password2HasError,
+  } = useInput(validatePassword2);
 
-   const formIsValid = usernameIsValid && emailIsValid && passwordIsValid && password2IsValid
+  const formIsValid =
+    usernameIsValid && emailIsValid && passwordIsValid && password2IsValid;
 
-   const handleSubmit = async (e) => {
-       e.preventDefault();
-       if(formIsValid){
-           const data = {
-             username,
-             email: email.toLowerCase(),
-             password,
-             password2,
-           };
-           const resultPromice = await dispatch(userRegister(data)) // last result from database
-           if(userRegister.fulfilled.match(resultPromice)){ // if successful registartion
-             setSuccess(true);
-             setTimeout(()=>{
-               navigate('/accounts/login/')
-             }, 5000);
-           }
-       }else{
-           setFormHasError(true)
-       }
-   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formIsValid) {
+      const data = {
+        username,
+        email: email.toLowerCase(),
+        password,
+        password2,
+      };
+      const resultPromice = await dispatch(userRegister(data)); // last result from database
+      if (userRegister.fulfilled.match(resultPromice)) {
+        // if successful registartion
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/accounts/login/");
+        }, 5000);
+      }
+    } else {
+      setFormHasError(true);
+    }
+  };
 
-   useEffect(()=>{
-     if(error){
-       setFormHasError(true)
-     }
-   },[error])
+  useEffect(() => {
+    if (error) {
+      setFormHasError(true);
+    }
+  }, [error]);
 
-   // if any of the field changes
-   useEffect(()=>{
-       setFormHasError(false) // remove error msg
-   },[username, email, password, password2])
+  // if any of the field changes
+  useEffect(() => {
+    setFormHasError(false); // remove error msg
+  }, [username, email, password, password2]);
 
   return (
-    <div>
+    <div className="user__form">
       <form onSubmit={handleSubmit}>
-        <div className="message">
-            {
-              error
-                ? errorMsg
-                : formHasError && (
-                    <p>'Please fill form properly!'</p>
-                  ) /* error msg from database */
-            }
-            {success && <p>Account created successfully! You can now log in. {" "} <span>Plase wait...</span></p>}
+        <h2>User register</h2>
+        <div >
+          {
+            error ? (
+              <p className="form__error">{errorMsg}</p>
+            ) : (
+              formHasError && (
+                <p className="form__error">Please fill form properly!</p>
+              )
+            ) /* error msg from database */
+          }
+          {success && (
+            <p className="form__success">
+              Account created successfully! You can now log in.{" "}
+              <span>Plase wait...</span>
+            </p>
+          )}
         </div>
+
         <Input
           type="text"
           name="username"
           value={username}
-          placeholder="Enter username"
+          label="Username"
+          placeholder="username"
           onChange={usernameChange}
           onBlur={usernameBlur}
           hasError={usernameHasError}
@@ -151,7 +162,8 @@ const Register = () => {
           type="email"
           name="email"
           value={email}
-          placeholder="Enter email Address"
+          label="email address"
+          placeholder="email Address"
           onChange={emailChange}
           onBlur={emailBlur}
           hasError={emailHasError}
@@ -159,11 +171,13 @@ const Register = () => {
             email ? "Not a valid email adderss!" : "Email cannot be empty!"
           }
         />
+
         <Input
           type="password"
           name="password"
           value={password}
-          placeholder="Enter a password"
+          label="password"
+          placeholder="password"
           onChange={passwordChange}
           onBlur={passwordBlur}
           hasError={passwordHasError}
@@ -177,6 +191,7 @@ const Register = () => {
           type="password"
           name="password2"
           value={password2}
+          label="confirm password"
           placeholder="Confirm password"
           onChange={password2Change}
           onBlur={password2Blur}
@@ -187,10 +202,11 @@ const Register = () => {
               : "Please confirm your password."
           }
         />
+
         <div className="form__actions">
           <button type="submit">register</button>
           <p>
-            Already have an account? {" "} <Link to="/accounts/login/">log in</Link>
+            Already have an account? <Link to="/accounts/login/">Log in</Link>
           </p>
         </div>
       </form>
