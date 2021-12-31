@@ -100,4 +100,3 @@ export const getPaginatedProducts = (products) => {
         return paginatedProducts;
     }
 }
-

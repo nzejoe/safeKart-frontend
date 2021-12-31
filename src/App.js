@@ -28,6 +28,7 @@ import {
   OrderHistoryPage,
   OrderDetailPage,
   HomeSearch,
+  AdminDashboard,
 } from "./components/Pages";
 
 import './App.css';
@@ -52,6 +53,7 @@ function App() {
           <Route path="/" element={<Home />}>
             <Route path="search" element={<HomeSearch />} />
           </Route>
+          <Route path="dashboard/" element={<AdminDashboard/>}/>
           <Route path="store/" element={<Store />} />
           <Route path="store/:slug/" element={<ProductDetailPage />} exact />
           <Route

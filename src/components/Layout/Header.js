@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // icons
@@ -16,6 +16,8 @@ import styles from "./Header.module.css";
 //ui
 import ModalSearch from "../UI/ModalSearch";
 import { useRef } from "react";
+// context
+import { NavContext } from "../../context/nav-context";
 
 const Header = () => {
   const { authUser } = useSelector((state) => state.users);
@@ -35,7 +37,10 @@ const Header = () => {
 
   // nanbar top fixing
   const [fixedNav, setFixedNav] = useState(false);
-  const navbarRef = useRef()
+  const navbarRef = useRef();
+
+  // navbar context usage
+  const { getNavRef } = useContext(NavContext);
 
   const dispatch = useDispatch();
 
@@ -79,19 +84,24 @@ const Header = () => {
   };
 
   // WINDOW SCROLL HANDLER
-  useEffect(()=>{
-    window.addEventListener('scroll', (e)=>{
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
       // set navbar height
-      const navHeight = navbarRef.current && navbarRef.current.clientHeight
+      const navHeight = navbarRef.current && navbarRef.current.clientHeight;
       // check if window scroll top is greater than the height of navbar
       if (window.pageYOffset > navHeight) {
-        setFixedNav(true)
+        setFixedNav(true);
       } else {
-        setFixedNav(false)
-      };
-    })
-    
-  },[])
+        setFixedNav(false);
+      }
+    });
+  }, []);
+
+  // context handler that get the navbar ref each time this component renders 
+  useEffect(()=>{
+    getNavRef(navbarRef);
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <section className={`${styles.navbar} ${fixedNav && styles.fixed__nav}`}>
@@ -139,6 +149,7 @@ const Header = () => {
         </div>
         <div className="search__results"></div>
       </div>
+      {/* NAVBAR */}
       <div className={`section__wrapper`} ref={navbarRef}>
         <div className={styles.logo}>
           <h5>SafeKart</h5>
@@ -178,6 +189,11 @@ const Header = () => {
                 <li>
                   <NavLink to="/store/" onClick={() => setShowLinks(false)}>
                     store
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/" onClick={() => setShowLinks(false)}>
+                    dashboard
                   </NavLink>
                 </li>
               </ul>

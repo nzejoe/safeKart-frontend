@@ -17,6 +17,7 @@ import OrderConfirmedPage from "./OrderConfirmedPage";
 import OrderHistoryPage from "./OrderHistoryPage";
 import OrderDetailPage from "./OrderDetailPage";
 import HomeSearch from "./HomeSearch";
+import AdminDashboard from './AdminDashboard';
 
 export {
   UserRegisterPage,
@@ -38,4 +39,5 @@ export {
   OrderHistoryPage,
   OrderDetailPage,
   HomeSearch,
+  AdminDashboard,
 };
