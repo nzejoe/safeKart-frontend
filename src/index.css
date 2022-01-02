@@ -191,3 +191,8 @@ table td {
   text-decoration: underline;
 }
 /* END OF FORM */
+
+
+.dashboard > div .fusioncharts-container{
+  width: 100% !important;
+}
