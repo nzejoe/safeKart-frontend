@@ -18,45 +18,6 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-// STEP 2 - Chart Data
-const chartData = [
-  {
-    label: "Venezuela",
-    value: "290",
-  },
-  {
-    label: "Saudi",
-    value: "260",
-  },
-  {
-    label: "Canada",
-    value: "180",
-  },
-  {
-    label: "Iran",
-    value: "140",
-  },
-  {
-    label: "Russia",
-    value: "115",
-  },
-  {
-    label: "UAE",
-    value: "100",
-  },
-  {
-    label: "US",
-    value: "30",
-  },
-  {
-    label: "China",
-    value: "30",
-  },
-];
-
-
-
-
 // STEP 4 - Creating the DOM element to pass the react-fusioncharts component
 const TopSellingChart = () => {
   const { topSelling, getTopSelling } = useContext(SalesContext);

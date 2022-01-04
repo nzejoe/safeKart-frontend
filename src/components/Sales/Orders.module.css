@@ -1,0 +1,16 @@
+.orders{
+  width: 100%;
+  overflow: auto;
+}
+
+.orders thead{
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.orders table{
+  width: auto;
+}
+
+.orders td{
+  min-width: 12rem;
+}
