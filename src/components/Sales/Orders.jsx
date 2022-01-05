@@ -20,7 +20,7 @@ const Orders = () => {
   }, [refresh]);
 
   return (
-    <div className={styles.orders}>
+    <div className={`${styles.orders} orders`}>
       <h2>Recent orders</h2>
       <table>
         <thead>
@@ -50,15 +50,15 @@ const Orders = () => {
                     {order.order.address_1}, {order.order.city}{" "}
                     {order.order.state} {order.order.country}
                   </td>
-                  <td>{order.quantity}</td>
-                  <td>{order.total_amount}</td>
+                  <td className={styles.quantity}>{order.quantity}</td>
+                  <td>{`$${order.total_amount}`}</td>
                   <td>{getOrderDateTime(order.order.updated)}</td>
-                  <td>{order.status}</td>
+                  <td className={`${styles.status} ${order.status}`}>
+                    {" "}
+                    <span>{order.status}</span>{" "}
+                  </td>
                   <td>
-                    <OrderUpdate
-                      getUpdate={getUpdate}
-                      order={order}
-                    />
+                    <OrderUpdate getUpdate={getUpdate} order={order} />
                   </td>
                 </tr>
               );
@@ -86,7 +86,12 @@ const OrderUpdate = ({ getUpdate, order }) => {
   return (
     <React.Fragment>
       {!isUpdate ? (
-        <button onClick={() => setIsUpdate(true)}>update</button>
+        <button
+          className={styles.btn__update}
+          onClick={() => setIsUpdate(true)}
+        >
+          update
+        </button>
       ) : (
         <form onSubmit={submitHandler}>
           <select
@@ -99,7 +104,17 @@ const OrderUpdate = ({ getUpdate, order }) => {
             <option value="out for delivery">Out for delivery</option>
             <option value="delivered">Delivered</option>
           </select>
-          <button type="submit">Save</button>
+          <br />
+          <button className={styles.btn__update} type="submit">
+            Save
+          </button>
+          <button
+            className={`${styles.btn__update}`}
+            type="submit"
+            onClick={() => setIsUpdate(false)}
+          >
+            Cancel
+          </button>
         </form>
       )}
     </React.Fragment>

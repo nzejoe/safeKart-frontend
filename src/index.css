@@ -196,3 +196,26 @@ table td {
 .dashboard > div .fusioncharts-container{
   width: 100% !important;
 }
+
+/* DASHBOARD */
+.dashboard td span{
+  color: #6ed0d3;
+  border: 1px solid #6ed0d3;
+  padding: .5rem;
+  border-radius: 3px;
+}
+
+.dashboard .delivered span{
+  color: #4e9e66;
+  border: 1px solid #4e9e66;
+  padding: .5rem;
+  border-radius: 3px;
+}
+
+.dashboard .pending span{
+  color: #fcae49;
+  border: 1px solid #fcae49;
+  padding: .5rem;
+  border-radius: 3px;
+}
+/* END OF DASHBOARD */

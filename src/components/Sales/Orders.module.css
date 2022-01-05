@@ -1,16 +1,61 @@
-.orders{
+.orders {
   width: 100%;
-  overflow: auto;
+  box-shadow: var(--light-shadow);
+  padding: 2rem;
+  margin-top: 2rem;
 }
 
-.orders thead{
-  border-bottom: 2px solid var(--primary-color);
+
+.orders h2{
+  margin-bottom: 2rem;
 }
 
-.orders table{
+
+.orders table {
   width: auto;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.orders td{
-  min-width: 12rem;
+.orders th{
+  padding: 2rem 0;
+  border-bottom: 3px solid var(--primary-color);
+  font-size: 1.3rem;
 }
+
+.orders td {
+  min-width: 12rem;
+  padding: 2rem .5rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.orders tbody tr:hover{
+  background-color: var(--dark-trans-3);
+}
+
+.orders .status,
+.orders .quantity{
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.btn__update{
+  background-color: var(--primary-color);
+  padding: .5rem 1rem;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn__update:hover{
+  background-color: var(--primary-color-dark);
+}
+
+@media screen and (max-width: 1300px) {
+  .orders {
+     overflow-x: scroll;
+  }
+}
+
+
