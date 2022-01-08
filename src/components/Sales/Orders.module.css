@@ -17,10 +17,17 @@
   width: 100%;
 }
 
+.orders thead{
+  width: 100%;
+  position: sticky;
+  left: 0;
+  background-color: #fff;
+}
+
 .orders th{
-  padding: 2rem 0;
-  border-bottom: 3px solid var(--primary-color);
+  padding: 3rem 0;
   font-size: 1.3rem;
+  border-bottom: 3px solid var(--primary-color);
 }
 
 .orders td {
@@ -31,7 +38,7 @@
 }
 
 .orders tbody tr:hover{
-  background-color: var(--dark-trans-3);
+  background-color: var(--dark-trans-4);
 }
 
 .orders .status,

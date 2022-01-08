@@ -5,6 +5,8 @@ import axios from "axios";
 
 // redux
 import { actions as userActions } from "./store/user-slice";
+// context
+import SalesProvider from "./context/sales-context";
 
 import { Base } from "./components/Layout";
 // pages
@@ -53,7 +55,14 @@ function App() {
           <Route path="/" element={<Home />}>
             <Route path="search" element={<HomeSearch />} />
           </Route>
-          <Route path="dashboard/" element={<AdminDashboard/>}/>
+          <Route
+            path="dashboard/"
+            element={
+              <SalesProvider>
+                <AdminDashboard />
+              </SalesProvider>
+            }
+          />
           <Route path="store/" element={<Store />} />
           <Route path="store/:slug/" element={<ProductDetailPage />} exact />
           <Route

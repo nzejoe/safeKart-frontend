@@ -1,3 +1,43 @@
 .main{
     padding: 2rem;
 }
+
+.orders__card{
+    width: 100%;
+    background-color: var(--primary-color);
+    margin-bottom: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.pending{
+    background-color: var(--primary-color-dark);
+}
+
+.delivered{
+    background-color: var(--primary-color-light);
+}
+
+.orders__card h2{
+    border-bottom: 1px solid var(--dark-trans-3);
+    padding: 2rem;
+    font-size: 2rem
+}
+
+.orders__card h3{
+    padding: 3rem;
+    font-size: 2rem
+}
+
+
+@media screen and (min-width: 600px) {
+    .order__cards{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .orders__card{
+        flex: 0 0 calc((100% / 3) - 2rem);
+    }
+}

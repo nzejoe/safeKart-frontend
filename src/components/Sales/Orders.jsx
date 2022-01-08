@@ -6,7 +6,7 @@ import { getOrderDateTime } from "../../utils";
 // style
 import styles from './Orders.module.css'
 
-const Orders = () => {
+const Orders = ({ navHeight }) => {
   const { orders, refresh, getOrders, sendOrderUpdate } = useContext(SalesContext);
 
   const getUpdate = (orderUpdate) => {
@@ -23,7 +23,7 @@ const Orders = () => {
     <div className={`${styles.orders} orders`}>
       <h2>Recent orders</h2>
       <table>
-        <thead>
+        <thead style={{top: navHeight}}>
           <tr>
             <th>#</th>
             <th>Customer</th>

@@ -13,6 +13,7 @@
   --dark-trans: rgba(0, 0, 0, 0.404);
   --dark-trans-2: rgba(0, 0, 0, 0.322);
   --dark-trans-3: rgba(0, 0, 0, 0.178);
+  --dark-trans-4: rgba(0, 0, 0, 0.123);
   --color-gray: rgb(224, 224, 224);
   --color-gray-dark: rgb(80, 80, 80);
   --light-color-trans: rgba(255, 255, 255, 0.425);
@@ -195,6 +196,7 @@ table td {
 
 .dashboard > div .fusioncharts-container{
   width: 100% !important;
+  max-width: 50rem !important;
 }
 
 /* DASHBOARD */
