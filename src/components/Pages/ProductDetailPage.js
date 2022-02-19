@@ -181,7 +181,9 @@ const ProductDetailPage = () => {
         {product && !loading && (
           <div>
             <div className={styles.product__detail}>
+              {/* img viewer */}
               <div className={styles.image__container}>
+                {/* product gallery thumbnail */}
                 <div className="gallery__thumbs">
                   {product.gallery.map((img, index) => {
                     return (
@@ -191,7 +193,7 @@ const ProductDetailPage = () => {
                         onClick={(e) => setDefaultImage(img.image)}
                       >
                         <img
-                          src={`http://localhost:8000${img.thumb}`}
+                          src={img.thumb}
                           alt={product.product_name}
                           width="50"
                         />
@@ -199,11 +201,9 @@ const ProductDetailPage = () => {
                     );
                   })}
                 </div>
+                {/* product default image */}
                 <div className={styles.default__img}>
-                  <img
-                    src={`http://localhost:8000${defaultImage}`}
-                    alt={product.product_name}
-                  ></img>
+                  <img src={defaultImage} alt={product.product_name}></img>
                 </div>
               </div>
               <div>
@@ -254,7 +254,8 @@ const ProductDetailPage = () => {
                         })}
                       </div>
                     )}
-
+                   
+                        {/* product variation selector */}
                     {sizes.length > 0 && (
                       <div>
                         <h5 className={styles.variation__title}>sizes</h5>
@@ -312,7 +313,7 @@ const ProductDetailPage = () => {
                         </span>
                       </div>
                     </div>
-
+                        {/* submit button */}
                     <div>
                       <button
                         className="light__btn_big"

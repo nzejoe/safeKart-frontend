@@ -48,12 +48,9 @@ const ModalSearch = ({ query, setIsSearching, setQuery, closeSearch }) => {
                 className={styles.search__product}
               >
                 <div>
-                  <img
-                    src={`http://localhost:8000${product.image}`}
-                    alt={product.product_name}
-                  />
+                  <img src={product.image} alt={product.product_name} />
                 </div>
-                  <span>{product.product_name}</span>
+                <span>{product.product_name}</span>
               </Link>
             </div>
           );

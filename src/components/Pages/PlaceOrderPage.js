@@ -70,7 +70,7 @@ const PlaceOrderPage = () => {
                       >
                         <div className="cart__item_img">
                           <img
-                            src={`http://localhost:8000${product.image}`}
+                            src={product.image}
                             alt={product.product_name}
                             style={{ width: "100px" }}
                           />
