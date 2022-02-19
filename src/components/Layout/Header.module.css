@@ -2,6 +2,8 @@
   box-shadow: var(--light-shadow);
   padding: 1rem;
   transition: all .5s;
+  position: relative;
+  z-index: 100;
 }
 
 .navbar > div:not(.search__modal) {
