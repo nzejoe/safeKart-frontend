@@ -158,7 +158,7 @@ const Home = () => {
                     <div className={styles.category} key={category.id}>
                       <div className={styles.category__img_container}>
                         <img
-                          src={`http://localhost:8000${category.image}`}
+                          src={category.image}
                           alt={category.product_name}
                         ></img>
                         <div className={styles.category__info}>
@@ -187,7 +187,7 @@ const Home = () => {
                 <div className={styles.product} key={product.id}>
                   <div className={styles.product__img_container}>
                     <img
-                      src={`http://localhost:8000${product.image}`}
+                      src={product.image}
                       alt={product.product_name}
                     ></img>
                   </div>

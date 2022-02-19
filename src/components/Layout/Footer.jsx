@@ -79,8 +79,8 @@ const Footer = () => {
           </p>
         </div>
         <div className={styles.misc}>
-          <img src="images/misc/payment-paypal.png" alt="" />
-          <img src="images/misc/payments.png" alt="" />
+          <img src="/images/misc/payment-paypal.png" alt="" />
+          <img src="/images/misc/payments.png" alt="" />
         </div>
       </div>
     </footer>

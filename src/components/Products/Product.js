@@ -9,7 +9,7 @@ const Product = ({ product, grid, styles }) => {
         <div className={styles.grid__product}>
           <div className={styles.image__container}>
             <img
-              src={`http://localhost:8000${product.image}`}
+              src={product.image}
               alt={product.product_name}
             ></img>
           </div>
@@ -33,7 +33,7 @@ const Product = ({ product, grid, styles }) => {
         <div className={styles.list__product}>
           <div className={styles.image__container}>
             <img
-              src={`http://localhost:8000${product.image}`}
+              src={product.image}
               alt={product.product_name}
             ></img>
           </div>
