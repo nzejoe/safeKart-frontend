@@ -36,7 +36,7 @@ import {
 import './App.css';
 
 // set axios default baseURL
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://codegenesis-takenotes.herokuapp.com";
 axios.defaults.withCredentials = true;
 
 function App() {
