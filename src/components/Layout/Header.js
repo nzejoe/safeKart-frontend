@@ -8,7 +8,7 @@ import { FaRegUser } from "react-icons/fa";
 
 // redux
 import { userLogout, actions as userActions } from "../../store/user-slice";
-import { getCartList } from "../../store/cart-slice";
+import { getCartList, actions as cartActions } from "../../store/cart-slice";
 // utils
 import { getTotalCart } from "../../utils";
 // style
@@ -45,7 +45,12 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCartList(token));
+    if (token) {
+      dispatch(getCartList(token));
+      return;
+    } else {
+      dispatch(cartActions.getGuestCartList());
+    }
   }, [dispatch, token, refresh]);
 
   const handleLogout = (e) => {
@@ -97,11 +102,11 @@ const Header = () => {
     });
   }, []);
 
-  // context handler that get the navbar ref each time this component renders 
-  useEffect(()=>{
+  // context handler that get the navbar ref each time this component renders
+  useEffect(() => {
     getNavRef(navbarRef);
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   return (
     <section className={`${styles.navbar} ${fixedNav && styles.fixed__nav}`}>

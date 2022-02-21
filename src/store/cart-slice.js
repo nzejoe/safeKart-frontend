@@ -59,7 +59,7 @@ export const addToCart = createAsyncThunk(
 const { actions, reducer } = createSlice({
   name: "carts",
   initialState: {
-    cartList: null,
+    cartList: [],
     refresh: 0,
     loading: false,
     currentRequestId: null,
@@ -71,14 +71,17 @@ const { actions, reducer } = createSlice({
 
     guestAddToCart(state, action) {
       const data = action.payload;
-      console.log(data)
+      console.log(data);
       // get cartitem from storage or create an empty array
-      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
+      let cartItems =
+        JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
 
       // check if any cart item
       if (cartItems.length > 0) {
         // check if user already have this item in his cart
-        const existingItem = cartItems.find(item => item.variation_id === data.variation_id )
+        const existingItem = cartItems.find(
+          (item) => item.variation_id === data.variation_id
+        );
         // if already has item in cart
         if (existingItem) {
           let newItems = cartItems.map((item) => {
@@ -90,7 +93,7 @@ const { actions, reducer } = createSlice({
           });
 
           localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
-          return
+          return;
         }
         // if different item then add to cart list
         cartItems.push(data);
@@ -102,6 +105,11 @@ const { actions, reducer } = createSlice({
         // save to storage
         localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
       }
+      state.refresh++
+    },
+    getGuestCartList(state, action) {
+      state.cartList =
+        JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
     },
   },
 

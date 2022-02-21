@@ -159,7 +159,7 @@ const ProductDetailPage = () => {
     if (!formHasError) {
       const variation_id = `${product.id}${selectedColor}${selectedSize}${product.variations.brand[0] || null}`;
       let data = {
-        product,
+        product_id: product.id,
         color: selectedColor,
         size: selectedSize,
         brand: brand || null,
@@ -172,7 +172,7 @@ const ProductDetailPage = () => {
         return
       }
       // save to storage
-      dispatch(cartActions.guestAddToCart({ ...data, variation_id }));
+      dispatch(cartActions.guestAddToCart({ ...data, variation_id, product }));
     }
   };
 
