@@ -70,21 +70,25 @@ const CartItem = ({ item, styles }) => {
 
   // this reduces the quantity of cart item
   const removeItem = async () => {
-    try {
-      const response = await axios({
-        url: "/carts/remove_item/",
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        data: { item_id: item.id },
-      });
+    if(authUser){
+      try {
+        const response = await axios({
+          url: "/carts/remove_item/",
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          data: { item_id: item.id },
+        });
 
-      if (response.status === 200) {
-        dispatch(cartActions.refreshCart());
+        if (response.status === 200) {
+          dispatch(cartActions.refreshCart());
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    }else{
+      dispatch(cartActions.removeItem(item.id));
     }
   };
 

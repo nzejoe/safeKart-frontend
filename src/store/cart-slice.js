@@ -152,6 +152,15 @@ const { actions, reducer } = createSlice({
       state.refresh++;
     },
 
+    removeItem(state, action){
+      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem"));
+      const id = action.payload;
+      // remove item from list
+      let newItems = cartItems.filter((item) => item.id !== id);
+      localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
+      state.refresh++;
+    },
+
     getGuestCartList(state, action) {
       state.cartList =
         JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
