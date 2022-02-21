@@ -78,9 +78,7 @@ const { actions, reducer } = createSlice({
       // check if any cart item
       if (cartItems.length > 0) {
         // check if user already have this item in his cart
-        const existingItem = cartItems.find(
-          (item) => item.id === data.id
-        );
+        const existingItem = cartItems.find((item) => item.id === data.id);
         // if already has item in cart
         if (existingItem) {
           let newItems = cartItems.map((item) => {
@@ -111,22 +109,48 @@ const { actions, reducer } = createSlice({
     },
 
     // ITEM INCREMENT
-    incrementItem(state, action){
-      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem"))
+    incrementItem(state, action) {
+      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem"));
       const id = action.payload;
       let newItems = cartItems.map((item) => {
         if (item.id === id) {
           // increase the quantity of the item in cart
           item.quantity++;
-          item.total_amount = parseFloat(item.total_amount) + parseFloat(item.product.price);
+          item.total_amount =
+            parseFloat(item.total_amount) + parseFloat(item.product.price);
         }
         return item;
       });
       localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
-      state.refresh++
+      state.refresh++;
     },
 
-    
+    // DECREMENT ITEM
+    decrementItem(state, action) {
+      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem"));
+      const id = action.payload;
+      const existingItem = cartItems.find((item) => item.id === id);
+
+      // check if item quantity is greater than one
+      if (existingItem.quantity > 1) {
+        // reduce by 1
+        let newItems = cartItems.map((item) => {
+          if (item.id === id) {
+            // increase the quantity of the item in cart
+            item.quantity--;
+            item.total_amount =
+              parseFloat(item.total_amount) - parseFloat(item.product.price);
+          }
+          return item;
+        });
+        localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
+      }else{
+        // remove item from list
+        let newItems = cartItems.filter(item => item.id !== id);
+        localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
+      }
+      state.refresh++;
+    },
 
     getGuestCartList(state, action) {
       state.cartList =
