@@ -36,8 +36,8 @@ import {
 import './App.css';
 
 // set axios default baseURL
-// axios.defaults.baseURL = "https://codegenesis-safekart.herokuapp.com";
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://codegenesis-safekart.herokuapp.com";
+// axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 function App() {
