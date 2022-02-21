@@ -79,12 +79,12 @@ const { actions, reducer } = createSlice({
       if (cartItems.length > 0) {
         // check if user already have this item in his cart
         const existingItem = cartItems.find(
-          (item) => item.variation.id === data.variation.id
+          (item) => item.id === data.id
         );
         // if already has item in cart
         if (existingItem) {
           let newItems = cartItems.map((item) => {
-            if (item.variation.id === data.variation.id) {
+            if (item.id === data.id) {
               // increase the quantity of the item in cart
               item.quantity = item.quantity + data.quantity;
               item.total_amount =

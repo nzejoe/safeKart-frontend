@@ -158,9 +158,6 @@ const ProductDetailPage = () => {
     if (!formHasError) {
       // const variation_id = `${product.id}${selectedColor}${selectedSize}${product.variations.brand[0] || null}`;
       const variation = {
-        id: `${product.id}${selectedColor}${selectedSize}${
-          product.variations.brand[0] || null
-        }`,
         brand: product.variations.brand[0] || null,
         color: selectedColor,
         size: selectedSize,
@@ -181,7 +178,9 @@ const ProductDetailPage = () => {
       // save to storage
       data = {
         ...data,
-        id: Math.random(),
+        id: `${product.id}${selectedColor}${selectedSize}${
+          product.variations.brand[0] || null
+        }`,
         variation,
         product,
         total_amount: (quantity * product.price).toFixed(2),
