@@ -51,7 +51,7 @@ const Header = () => {
     } else {
       dispatch(cartActions.getGuestCartList());
     }
-  }, [dispatch, token, refresh, cartList]);
+  }, [dispatch, token, refresh]);
 
   const handleLogout = (e) => {
     dispatch(userLogout(token));

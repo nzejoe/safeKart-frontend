@@ -71,7 +71,6 @@ const { actions, reducer } = createSlice({
     // ADD TO QUEST CART
     guestAddToCart(state, action) {
       const data = action.payload;
-      console.log(data);
       // get cartitem from storage or create an empty array
       let cartItems =
         JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
@@ -88,18 +87,19 @@ const { actions, reducer } = createSlice({
             if (item.variation.id === data.variation.id) {
               // increase the quantity of the item in cart
               item.quantity = item.quantity + data.quantity;
-              item.total_amount = parseFloat(item.total_amount) + parseFloat(data.total_amount)
+              item.total_amount =
+                parseFloat(item.total_amount) + parseFloat(data.total_amount);
             }
             return item;
           });
 
           localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
-          return;
+        } else {
+          // if different item then add to cart list
+          cartItems.push(data);
+          // save to storage
+          localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
         }
-        // if different item then add to cart list
-        cartItems.push(data);
-        // save to storage
-        localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
       } else {
         // add to cart list
         cartItems.push(data);
@@ -107,8 +107,7 @@ const { actions, reducer } = createSlice({
         localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
       }
 
-      state.cartList =
-        JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
+      state.refresh++;
     },
     getGuestCartList(state, action) {
       state.cartList =
