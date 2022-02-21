@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 // icons
 import { FiPlus, FiMinus } from "react-icons/fi";
@@ -9,27 +9,35 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 import { actions as cartActions } from "../../store/cart-slice";
 
 const CartItem = ({ item, styles }) => {
+  const { authUser } = useSelector((state) => state.users)
   const { product, variation } = item;
 
   const dispatch = useDispatch();
 
   // this increases the quantity of cart item
   const incrementItem = async () => {
-    try {
-      const response = await axios({
-        url: "/carts/increment_item/",
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        data: { item_id: item.id },
-      });
+    // check if user is authenticated
+    if(authUser){
+      // increment on server
+      try {
+        const response = await axios({
+          url: "/carts/increment_item/",
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          data: { item_id: item.id },
+        });
 
-      if (response.status === 200) {
-        dispatch(cartActions.refreshCart());
+        if (response.status === 200) {
+          dispatch(cartActions.refreshCart());
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    }else{
+      // increment on localStorage
+      dispatch(cartActions.incrementItem(item.id))
     }
   };
 

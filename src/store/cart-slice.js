@@ -109,6 +109,25 @@ const { actions, reducer } = createSlice({
 
       state.refresh++;
     },
+
+    // ITEM INCREMENT
+    incrementItem(state, action){
+      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem"))
+      const id = action.payload;
+      let newItems = cartItems.map((item) => {
+        if (item.id === id) {
+          // increase the quantity of the item in cart
+          item.quantity++;
+          item.total_amount = parseFloat(item.total_amount) + parseFloat(item.product.price);
+        }
+        return item;
+      });
+      localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
+      state.refresh++
+    },
+
+    
+
     getGuestCartList(state, action) {
       state.cartList =
         JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
