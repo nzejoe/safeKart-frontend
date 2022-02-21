@@ -10,6 +10,7 @@ export const userLogin = createAsyncThunk(
     'users/login',
     async (payload, { rejectWithValue, getState })=>{
 
+
         try {
             const response = await axios({
               url: "/accounts/login/",
@@ -176,6 +177,8 @@ const {actions, reducer} = createSlice({
             const { requestId } = action.meta;
             if(state.currentRequestId === requestId){
                 localStorage.setItem("safekartUser", JSON.stringify(action.payload));
+                // remove cart item from localStorage
+                localStorage.removeItem("safekart_cartItem");
                 state.currentRequestId = null;
                 state.error = null;
                 state.refresh++

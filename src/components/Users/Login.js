@@ -41,9 +41,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(formIsValid){
+        const cartItems = JSON.parse(localStorage.getItem("safekart_cartItem"));
         const data = {
           username: email,
           password: password,
+          cartItems: JSON.stringify(cartItems),
         };
 
         const resultPromise = await dispatch(userLogin(data));
