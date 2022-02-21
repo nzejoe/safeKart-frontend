@@ -5,9 +5,9 @@ import Cookies from "js-cookie";
 
 // cart list
 export const getCartList = createAsyncThunk(
-  'cart/list',
-  async(payload, { getState, rejectWithValue })=>{
-    const token  = payload
+  "cart/list",
+  async (payload, { getState, rejectWithValue }) => {
+    const token = payload;
     try {
       const response = await axios({
         url: "/carts/",
@@ -16,22 +16,21 @@ export const getCartList = createAsyncThunk(
           authorization: token ? `token ${token}` : "",
         },
       });
-      return response.data
-
+      return response.data;
     } catch (error) {
-      const err = error
-      if(!err){
-        throw error
+      const err = error;
+      if (!err) {
+        throw error;
       }
 
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data);
     }
   }
-)// cart list //
+); // cart list //
 
 // add to cart
 export const addToCart = createAsyncThunk(
-  'cart/add',
+  "cart/add",
   async (payload, { rejectWithValue }) => {
     const { data, token } = payload;
     try {
@@ -44,20 +43,18 @@ export const addToCart = createAsyncThunk(
           authorization: token ? `token ${token}` : "",
         },
         data: data,
-      })
-      return res.data
-
+      });
+      return res.data;
     } catch (error) {
       const err = error;
-      if(!err){
-        throw error
+      if (!err) {
+        throw error;
       }
 
       return rejectWithValue(err.response.data);
     }
   }
-) 
-
+);
 
 const { actions, reducer } = createSlice({
   name: "carts",
@@ -68,9 +65,44 @@ const { actions, reducer } = createSlice({
     currentRequestId: null,
   },
   reducers: {
-    refreshCart(state, action){
-      state.refresh ++
-    }
+    refreshCart(state, action) {
+      state.refresh++;
+    },
+
+    guestAddToCart(state, action) {
+      const data = action.payload;
+      console.log(data)
+      // get cartitem from storage or create an empty array
+      let cartItems = JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
+
+      // check if any cart item
+      if (cartItems.length > 0) {
+        // check if user already have this item in his cart
+        const existingItem = cartItems.find(item => item.variation_id === data.variation_id )
+        // if already has item in cart
+        if (existingItem) {
+          let newItems = cartItems.map((item) => {
+            if (item.variation_id === data.variation_id) {
+              // increase the quantity of the item in cart
+              item.quantity = item.quantity + data.quantity;
+            }
+            return item;
+          });
+
+          localStorage.setItem("safekart_cartItem", JSON.stringify(newItems));
+          return
+        }
+        // if different item then add to cart list
+        cartItems.push(data);
+        // save to storage
+        localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
+      } else {
+        // add to cart list
+        cartItems.push(data);
+        // save to storage
+        localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
+      }
+    },
   },
 
   extraReducers: {
@@ -105,7 +137,7 @@ const { actions, reducer } = createSlice({
     [addToCart.fulfilled]: (state, action) => {
       const { requestId } = action.meta;
       if (state.currentRequestId === requestId) {
-        state.refresh ++
+        state.refresh++;
         state.currentRequestId = null;
         state.loading = false;
       }
@@ -121,6 +153,6 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export { actions }
+export { actions };
 
 export default reducer;

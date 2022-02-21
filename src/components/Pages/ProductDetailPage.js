@@ -8,7 +8,7 @@ import { FiPlus, FiMinus } from 'react-icons/fi'
 import styles from "./ProductDetail.module.css";
 
 // state
-import { addToCart } from "../../store/cart-slice";
+import { addToCart, actions as cartActions } from "../../store/cart-slice";
 
 import UserReview from "../Products/UserReview";
 // ui
@@ -157,15 +157,22 @@ const ProductDetailPage = () => {
   const addItemHandler = (e) => {
     e.preventDefault();
     if (!formHasError) {
-      const data = {
-        product_id: product.id,
+      const variation_id = `${product.id}${selectedColor}${selectedSize}${product.variations.brand[0] || null}`;
+      let data = {
+        product,
         color: selectedColor,
         size: selectedSize,
         brand: brand || null,
         quantity,
       };
-      
-      dispatch(addToCart({ data, token }));
+      // check if user is authenticated
+      if(token){
+        // send to server
+        dispatch(addToCart({ data, token }));
+        return
+      }
+      // save to storage
+      dispatch(cartActions.guestAddToCart({ ...data, variation_id }));
     }
   };
 
