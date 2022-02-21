@@ -1,7 +1,7 @@
 .navbar {
   box-shadow: var(--light-shadow);
   padding: 1rem;
-  transition: all .5s;
+  transition: all 0.5s;
   position: relative;
   z-index: 100;
 }
@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.fixed__nav{
+.fixed__nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -87,14 +87,13 @@
   animation: slideFadeOut 0.5s 0s forwards;
 }
 
-
 .form__group input {
   width: 70%;
   outline: none;
   border: none;
   border-bottom: 1px solid var(--dark-trans-2);
   /* padding: 2rem 0 0.5rem 1rem; */
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
   font-size: 2rem;
 }
 
@@ -170,7 +169,7 @@
   position: fixed;
   top: 0;
   right: -100%;
-  transition: all 0.2s;
+  transition: right 0.2s;
   background-color: var(--primary-color);
   z-index: 5;
 }
@@ -206,7 +205,8 @@
   cursor: pointer;
 }
 
-.user__icon_wrapper {
+/* hide user icon on small scrren */
+.user__icon {
   display: none;
 }
 
@@ -282,9 +282,24 @@ a.cart__link {
     top: -20%;
     opacity: 0;
   }
+  
 }
 
 /* SCREEN RESIZE */
+/* mobile devices */
+@media screen and (max-width: 599px) {
+  .user__icon_wrapper{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+  .user__info_wrapper a,
+  .user__info_wrapper button{
+    font-size: 1.8rem;
+    margin-top: .5rem;
+  }
+}
+
+/* from tab up devices */
 @media screen and (min-width: 600px) {
   .logo {
     flex: 1 0;
@@ -355,6 +370,7 @@ a.cart__link {
   }
 
   .user__icon {
+    display: inline;
     font-size: 2.5rem;
   }
 
