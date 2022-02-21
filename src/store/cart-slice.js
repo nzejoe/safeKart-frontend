@@ -68,7 +68,7 @@ const { actions, reducer } = createSlice({
     refreshCart(state, action) {
       state.refresh++;
     },
-
+    // ADD TO QUEST CART
     guestAddToCart(state, action) {
       const data = action.payload;
       console.log(data);
@@ -80,14 +80,15 @@ const { actions, reducer } = createSlice({
       if (cartItems.length > 0) {
         // check if user already have this item in his cart
         const existingItem = cartItems.find(
-          (item) => item.variation_id === data.variation_id
+          (item) => item.variation.id === data.variation.id
         );
         // if already has item in cart
         if (existingItem) {
           let newItems = cartItems.map((item) => {
-            if (item.variation_id === data.variation_id) {
+            if (item.variation.id === data.variation.id) {
               // increase the quantity of the item in cart
               item.quantity = item.quantity + data.quantity;
+              item.total_amount = parseFloat(item.total_amount) + parseFloat(data.total_amount)
             }
             return item;
           });
@@ -105,7 +106,9 @@ const { actions, reducer } = createSlice({
         // save to storage
         localStorage.setItem("safekart_cartItem", JSON.stringify(cartItems));
       }
-      state.refresh++
+
+      state.cartList =
+        JSON.parse(localStorage.getItem("safekart_cartItem")) || [];
     },
     getGuestCartList(state, action) {
       state.cartList =

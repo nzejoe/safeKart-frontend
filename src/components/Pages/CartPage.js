@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 // store
-import { getCartList } from "../../store/cart-slice";
+import { getCartList, actions as cartActions } from "../../store/cart-slice";
 import { actions as userActions } from "../../store/user-slice";
 
 import CartItem from "../Cart/CartItem";
@@ -23,7 +23,11 @@ const CartPage = () => {
 
   useEffect(() => {
     const token = authUser && authUser.token;
-    dispatch(getCartList(token));
+    if(token){
+      dispatch(getCartList(token));
+      return
+    }
+    dispatch(cartActions.getGuestCartList());
   }, [dispatch, authUser, refresh]);
 
   const handleCheckout = () => {

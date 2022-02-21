@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 // icons
-import { FiPlus, FiMinus } from 'react-icons/fi'
+import { FiPlus, FiMinus } from "react-icons/fi";
 // style
 import styles from "./ProductDetail.module.css";
 
@@ -51,8 +51,7 @@ const ProductDetailPage = () => {
   const [toggle, setToggle] = useState(1);
 
   // page title
-   document.title = `${product && product.product_name} | SafeKart`
-
+  document.title = `${product && product.product_name} | SafeKart`;
 
   useEffect(() => {
     const getProduct = async () => {
@@ -134,7 +133,7 @@ const ProductDetailPage = () => {
   // quantity value change handler
   const handleQuantityChange = (quantity) => {
     const maxValue = product && product.stock;
-    let value =  parseInt(quantity);
+    let value = parseInt(quantity);
 
     if (value > maxValue) {
       setQuantity(maxValue);
@@ -146,18 +145,26 @@ const ProductDetailPage = () => {
   };
 
   // always check if user try to clear input value
-  // because if they do if will result in error 
-  useEffect(()=>{
-     if (Number.isNaN(quantity)) {
-       setQuantity(1); // set quantity to 1 if value cleared
-     }
-  },[quantity])
+  // because if they do if will result in error
+  useEffect(() => {
+    if (Number.isNaN(quantity)) {
+      setQuantity(1); // set quantity to 1 if value cleared
+    }
+  }, [quantity]);
 
   // form submit
   const addItemHandler = (e) => {
     e.preventDefault();
     if (!formHasError) {
-      const variation_id = `${product.id}${selectedColor}${selectedSize}${product.variations.brand[0] || null}`;
+      // const variation_id = `${product.id}${selectedColor}${selectedSize}${product.variations.brand[0] || null}`;
+      const variation = {
+        id: `${product.id}${selectedColor}${selectedSize}${
+          product.variations.brand[0] || null
+        }`,
+        brand: product.variations.brand[0] || null,
+        color: selectedColor,
+        size: selectedSize,
+      };
       let data = {
         product_id: product.id,
         color: selectedColor,
@@ -166,20 +173,27 @@ const ProductDetailPage = () => {
         quantity,
       };
       // check if user is authenticated
-      if(token){
+      if (token) {
         // send to server
         dispatch(addToCart({ data, token }));
-        return
+        return;
       }
       // save to storage
-      dispatch(cartActions.guestAddToCart({ ...data, variation_id, product }));
+      data = {
+        ...data,
+        id: Math.random(),
+        variation,
+        product,
+        total_amount: (quantity * product.price).toFixed(2),
+      };
+      dispatch(cartActions.guestAddToCart(data));
     }
   };
 
   // TAB TOGGLE HANDLER
   const handleTabToggle = (index) => {
-    setToggle(index)
-  }
+    setToggle(index);
+  };
 
   return (
     <section className={`section`}>
@@ -261,8 +275,8 @@ const ProductDetailPage = () => {
                         })}
                       </div>
                     )}
-                   
-                        {/* product variation selector */}
+
+                    {/* product variation selector */}
                     {sizes.length > 0 && (
                       <div>
                         <h5 className={styles.variation__title}>sizes</h5>
@@ -320,7 +334,7 @@ const ProductDetailPage = () => {
                         </span>
                       </div>
                     </div>
-                        {/* submit button */}
+                    {/* submit button */}
                     <div>
                       <button
                         className="light__btn_big"
