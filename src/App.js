@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -33,21 +33,20 @@ import {
   AdminDashboard,
 } from "./components/Pages";
 
-import './App.css';
+import "./App.css";
 
 // set axios default baseURL
-axios.defaults.baseURL = "https://codegenesis-safekart.herokuapp.com";
+axios.defaults.baseURL = "https://safekart.onrender.com";
 // axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 function App() {
   const { refresh } = useSelector((state) => state.users);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(userActions.setUser());
-  },[dispatch, refresh]);
-
+  }, [dispatch, refresh]);
 
   return (
     <Router>
@@ -66,26 +65,10 @@ function App() {
           />
           <Route path="store/" element={<Store />} />
           <Route path="store/:slug/" element={<ProductDetailPage />} exact />
-          <Route
-            path="accounts/login/"
-            element={<PublicRoute children={<LoginPage />} />}
-            exact
-          />
-          <Route
-            path="accounts/register/"
-            element={<PublicRoute children={<UserRegisterPage />} />}
-            exact
-          />
-          <Route
-            path="accounts/password_change/"
-            element={<PrivateRoute children={<PasswordChangePage />} />}
-            exact
-          />
-          <Route
-            path="accounts/password_reset/"
-            element={<PublicRoute children={<PasswordResetPage />} />}
-            exact
-          />
+          <Route path="accounts/login/" element={<PublicRoute children={<LoginPage />} />} exact />
+          <Route path="accounts/register/" element={<PublicRoute children={<UserRegisterPage />} />} exact />
+          <Route path="accounts/password_change/" element={<PrivateRoute children={<PasswordChangePage />} />} exact />
+          <Route path="accounts/password_reset/" element={<PublicRoute children={<PasswordResetPage />} />} exact />
           <Route
             path="accounts/password_reset_complete/"
             element={<PublicRoute children={<PasswordResetComplete />} />}
@@ -97,28 +80,11 @@ function App() {
             exact
           />
           <Route path="carts/" element={<CartPage />} exact />
-          <Route
-            path="checkout/"
-            element={<PrivateRoute children={<CheckoutPage />} />}
-            exact
-          />
-          <Route
-            path="place_order/"
-            element={<PrivateRoute children={<PlaceOrderPage />} />}
-            exact
-          />
-          <Route
-            path="order_confirmed/"
-            element={<PrivateRoute children={<OrderConfirmedPage />} />}
-          />
-          <Route
-            path="order_history/"
-            element={<PrivateRoute children={<OrderHistoryPage />} />}
-          />
-          <Route
-            path="order_history/:order_number/"
-            element={<PrivateRoute children={<OrderDetailPage />} />}
-          />
+          <Route path="checkout/" element={<PrivateRoute children={<CheckoutPage />} />} exact />
+          <Route path="place_order/" element={<PrivateRoute children={<PlaceOrderPage />} />} exact />
+          <Route path="order_confirmed/" element={<PrivateRoute children={<OrderConfirmedPage />} />} />
+          <Route path="order_history/" element={<PrivateRoute children={<OrderHistoryPage />} />} />
+          <Route path="order_history/:order_number/" element={<PrivateRoute children={<OrderDetailPage />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Base>
